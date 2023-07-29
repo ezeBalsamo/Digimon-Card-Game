@@ -1,6 +1,6 @@
 from src.digimon_card_game import DigimonForm
+from tests.assertions import assert_expected_enum_values
 
 
 def test_01_digimon_forms():
-    enum_values = set(map(lambda enum_item: enum_item.value, list(DigimonForm)))
-    assert enum_values == {'In-Training', 'Rookie', 'Champion', 'Mega', 'Ultimate'}
+    assert_expected_enum_values(DigimonForm, {'In-Training', 'Rookie', 'Champion', 'Mega', 'Ultimate'})
