@@ -4,11 +4,15 @@ version = "0.1.0"
 description = ""
 authors = ["ezeBalsamo <alexander.ezequiel.balsamo@gmail.com>"]
 readme = "README.md"
-packages = [{include = "digimon_card_game"}]
+packages = [{include = "digimon_card_game", from= "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
 
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^7.4.0"
+pytest-cov = "^4.1.0"
 
 [build-system]
 requires = ["poetry-core"]

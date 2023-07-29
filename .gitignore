@@ -1,1 +1,6 @@
+# JetBrains
 .idea
+
+# Pytest
+.coverage
+coverage.xml
