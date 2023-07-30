@@ -26,7 +26,7 @@ class Deck:
 
     def assert_is_not_empty(self):
         if self.is_empty():
-            raise ValueError('There are no more cards in the deck.')
+            raise ValueError('There are no more cards.')
 
     def is_empty(self):
         return not self.cards

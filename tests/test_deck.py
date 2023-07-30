@@ -8,7 +8,7 @@ from pytest import raises
 def assert_raises_no_more_cards(closure):
     with raises(ValueError) as exception_info:
         closure()
-    assert str(exception_info.value) == 'There are no more cards in the deck.'
+    assert str(exception_info.value) == 'There are no more cards.'
 
 
 def test_01_cannot_create_deck_without_cards():
