@@ -3,3 +3,4 @@
 
 # Pytest
 .coverage
+coverage.xml
