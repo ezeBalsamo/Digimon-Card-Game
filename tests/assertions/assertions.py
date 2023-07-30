@@ -27,3 +27,10 @@ def assert_raises_not_strictly_positive(attr_name: str, closure: Callable[[int],
         with raises(ValueError) as exception_info:
             closure(invalid_value)
         assert str(exception_info.value) == f"'{attr_name}' must be > 0: {invalid_value}"
+
+
+def assert_list_raises_not_minimum_length(attr_name: str, minimum_length: int, closure: Callable[[list], Any]):
+    invalid_list = list(range(minimum_length - 1))
+    with raises(ValueError) as exception_info:
+        closure(invalid_list)
+    assert str(exception_info.value) == f"Length of '{attr_name}' must be => {minimum_length}: {len(invalid_list)}"

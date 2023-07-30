@@ -1,2 +1,2 @@
 from .assertions import assert_expected_enum_values, assert_raises_not_blank, assert_raises_not_within_range, \
-    assert_raises_not_strictly_positive
+    assert_raises_not_strictly_positive, assert_list_raises_not_minimum_length
