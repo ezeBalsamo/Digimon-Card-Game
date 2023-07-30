@@ -87,3 +87,11 @@ def test_08_cannot_draw_many_cards_when_there_are_no_more_cards():
     with raises(ValueError) as exception_info:
         deck.draw_many(number_of_cards=2)
     assert str(exception_info.value) == 'There are no more cards in the deck.'
+
+
+def test_08_cannot_draw_more_cards_than_the_number_of_remaining_cards_in_deck():
+    first_card = koromon()
+    deck = Deck(cards=[first_card])
+    with raises(ValueError) as exception_info:
+        deck.draw_many(number_of_cards=2)
+    assert str(exception_info.value) == 'You cannot draw 2 cards. Number of remaining cards: 1.'

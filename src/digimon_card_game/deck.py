@@ -15,6 +15,10 @@ class Deck:
     def draw_many(self, number_of_cards):
         if not self.cards:
             raise ValueError('There are no more cards in the deck.')
+        number_of_remaining_cards = len(self.cards)
+        if number_of_remaining_cards < number_of_cards:
+            raise ValueError(
+                f'You cannot draw {number_of_cards} cards. Number of remaining cards: {number_of_remaining_cards}.')
         drawn_cards = self.cards[:number_of_cards]
         del self.cards[:number_of_cards]
         return drawn_cards
