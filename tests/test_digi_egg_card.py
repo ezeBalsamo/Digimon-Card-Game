@@ -1,28 +1,30 @@
 from src.digimon_card_game import DigiEggCard, CardColor, CardRarity, DigimonType, DigimonForm
-from tests.assertions import assert_raises_not_blank, assert_raises_not_within_range
+from tests.assertions.attributes import assert_attr_raises_not_blank, assert_attr_raises_not_within_range
 
 
 def test_01_name_must_not_be_blank():
-    assert_raises_not_blank('name',
-                            lambda invalid_name: DigiEggCard(name=invalid_name, color=CardColor.RED,
-                                                             identifier='ST1-01', rarity=CardRarity.COMMON,
-                                                             type=DigimonType.LESSER, level=2))
+    assert_attr_raises_not_blank('name',
+                                 lambda invalid_name: DigiEggCard(name=invalid_name, color=CardColor.RED,
+                                                                  identifier='ST1-01', rarity=CardRarity.COMMON,
+                                                                  type=DigimonType.LESSER, level=2))
 
 
 def test_02_identifier_must_not_be_blank():
-    assert_raises_not_blank('identifier',
-                            lambda invalid_identifier: DigiEggCard(name='Koromon', color=CardColor.RED,
-                                                                   identifier=invalid_identifier,
-                                                                   rarity=CardRarity.COMMON, type=DigimonType.LESSER,
-                                                                   level=2))
+    assert_attr_raises_not_blank('identifier',
+                                 lambda invalid_identifier: DigiEggCard(name='Koromon', color=CardColor.RED,
+                                                                        identifier=invalid_identifier,
+                                                                        rarity=CardRarity.COMMON,
+                                                                        type=DigimonType.LESSER,
+                                                                        level=2))
 
 
 def test_03_level_must_be_between_two_and_seven():
-    assert_raises_not_within_range('level', 2, 7, lambda invalid_level: DigiEggCard(name='Koromon', color=CardColor.RED,
-                                                                                    identifier='ST1-01',
-                                                                                    rarity=CardRarity.COMMON,
-                                                                                    type=DigimonType.LESSER,
-                                                                                    level=invalid_level))
+    assert_attr_raises_not_within_range('level', 2, 7,
+                                        lambda invalid_level: DigiEggCard(name='Koromon', color=CardColor.RED,
+                                                                          identifier='ST1-01',
+                                                                          rarity=CardRarity.COMMON,
+                                                                          type=DigimonType.LESSER,
+                                                                          level=invalid_level))
 
 
 def test_04_instance_creation_and_accessing():
