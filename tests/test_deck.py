@@ -5,6 +5,12 @@ from src.cards import koromon, shadow_wing, biyomon
 from pytest import raises
 
 
+def assert_raises_no_more_cards(closure):
+    with raises(ValueError) as exception_info:
+        closure()
+    assert str(exception_info.value) == 'There are no more cards in the deck.'
+
+
 def test_01_cannot_create_deck_without_cards():
     assert_list_raises_not_minimum_length('cards', 1, lambda invalid_cards: Deck(cards=invalid_cards))
 
@@ -36,9 +42,7 @@ def test_05_cannot_draw_when_there_are_no_more_cards():
     deck = Deck(cards=[koromon()])
     deck.draw()
     assert deck.is_empty()
-    with raises(ValueError) as exception_info:
-        deck.draw()
-    assert str(exception_info.value) == 'There are no more cards in the deck.'
+    assert_raises_no_more_cards(lambda: deck.draw())
 
 
 def test_06_draw_many_cards():
@@ -65,9 +69,7 @@ def test_08_cannot_draw_many_cards_when_there_are_no_more_cards():
     deck = Deck(cards=[first_card])
     deck.draw()
     assert deck.is_empty()
-    with raises(ValueError) as exception_info:
-        deck.draw_many(number_of_cards=2)
-    assert str(exception_info.value) == 'There are no more cards in the deck.'
+    assert_raises_no_more_cards(lambda: deck.draw_many(number_of_cards=2))
 
 
 def test_08_cannot_draw_more_cards_than_the_number_of_remaining_cards_in_deck():
