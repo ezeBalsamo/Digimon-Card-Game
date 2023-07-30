@@ -1,5 +1,5 @@
 from src.digimon_card_game import OptionCard, CardColor, CardRarity
-from tests.assertions import assert_attr_raises_not_blank, assert_raises_not_within_range
+from tests.assertions import assert_attr_raises_not_blank, assert_attr_raises_not_within_range
 
 
 def test_01_name_must_not_be_blank():
@@ -18,10 +18,10 @@ def test_02_identifier_must_not_be_blank():
 
 
 def test_03_cost_must_be_between_zero_and_twenty():
-    assert_raises_not_within_range('cost', 0, 20,
-                                   lambda invalid_cost: OptionCard(name='Shadow Wing', color=CardColor.RED,
-                                                                   identifier='ST1-13', rarity=CardRarity.COMMON,
-                                                                   cost=invalid_cost))
+    assert_attr_raises_not_within_range('cost', 0, 20,
+                                        lambda invalid_cost: OptionCard(name='Shadow Wing', color=CardColor.RED,
+                                                                        identifier='ST1-13', rarity=CardRarity.COMMON,
+                                                                        cost=invalid_cost))
 
 
 def test_04_instance_creation_and_accessing():
