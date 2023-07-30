@@ -1,5 +1,5 @@
 from src.digimon_card_game import Rarity, CardRarity
-from tests.assertions import assert_expected_enum_values
+from tests.assertions.enum import assert_expected_enum_values
 
 
 def test_01_rarity_instance_creation_and_accessing():
