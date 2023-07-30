@@ -8,12 +8,12 @@ class Deck:
     cards: list[Card] = field(validator=min_len(1))
 
     def draw(self):
-        if not self.cards:
+        if self.is_empty():
             raise ValueError('There are no more cards in the deck.')
         return self.cards.pop(0)
 
     def draw_many(self, number_of_cards):
-        if not self.cards:
+        if self.is_empty():
             raise ValueError('There are no more cards in the deck.')
         number_of_remaining_cards = len(self.cards)
         if number_of_remaining_cards < number_of_cards:
@@ -22,3 +22,6 @@ class Deck:
         drawn_cards = self.cards[:number_of_cards]
         del self.cards[:number_of_cards]
         return drawn_cards
+
+    def is_empty(self):
+        return not self.cards

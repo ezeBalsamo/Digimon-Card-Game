@@ -47,13 +47,13 @@ def test_04_draw_the_last_card():
     deck = Deck(cards=[card])
     drawn_card = deck.draw()
     assert drawn_card == card
-    assert not deck.cards
+    assert deck.is_empty()
 
 
 def test_05_cannot_draw_when_there_are_no_more_cards():
     deck = Deck(cards=[koromon()])
     deck.draw()
-    assert not deck.cards
+    assert deck.is_empty()
     with raises(ValueError) as exception_info:
         deck.draw()
     assert str(exception_info.value) == 'There are no more cards in the deck.'
@@ -76,14 +76,14 @@ def test_07_draw_many_cards_and_leave_the_deck_empty():
     deck = Deck(cards=[first_card, second_card])
     drawn_cards = deck.draw_many(number_of_cards=2)
     assert drawn_cards == [first_card, second_card]
-    assert not deck.cards
+    assert deck.is_empty()
 
 
 def test_08_cannot_draw_many_cards_when_there_are_no_more_cards():
     first_card = koromon()
     deck = Deck(cards=[first_card])
     deck.draw()
-    assert not deck.cards
+    assert deck.is_empty()
     with raises(ValueError) as exception_info:
         deck.draw_many(number_of_cards=2)
     assert str(exception_info.value) == 'There are no more cards in the deck.'
