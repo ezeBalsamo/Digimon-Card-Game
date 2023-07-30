@@ -1,5 +1,5 @@
 from src.digimon_card_game import Deck
-from tests.assertions import assert_list_raises_not_minimum_length
+from tests.assertions import assert_list_raises_not_minimum_length, assert_the_only_one_in
 from src.cards import koromon, shadow_wing, biyomon
 
 from pytest import raises
@@ -21,8 +21,7 @@ def test_03_draw_one_card():
     deck = Deck(cards=[first_card, second_card])
     drawn_card = deck.draw()
     assert drawn_card == first_card
-    assert len(deck.cards) == 1
-    assert deck.cards[0] == second_card
+    assert_the_only_one_in(deck.cards, second_card)
 
 
 def test_04_draw_the_last_card():
@@ -49,8 +48,7 @@ def test_06_draw_many_cards():
     deck = Deck(cards=[first_card, second_card, third_card])
     drawn_cards = deck.draw_many(number_of_cards=2)
     assert drawn_cards == [first_card, second_card]
-    assert len(deck.cards) == 1
-    assert deck.cards[0] == third_card
+    assert_the_only_one_in(deck.cards, third_card)
 
 
 def test_07_draw_many_cards_and_leave_the_deck_empty():
