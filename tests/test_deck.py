@@ -35,3 +35,11 @@ def test_03_draw_one_card():
     assert drawn_card == first_card
     assert len(deck.cards) == 1
     assert deck.cards[0] == second_card
+
+
+def test_04_draw_the_last_card():
+    card = koromon()
+    deck = Deck(cards=[card])
+    drawn_card = deck.draw()
+    assert drawn_card == card
+    assert not deck.cards
