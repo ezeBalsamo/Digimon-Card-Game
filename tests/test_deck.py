@@ -20,9 +20,7 @@ def test_01_cannot_create_deck_without_cards():
 
 
 def test_02_instance_creation_and_accessing():
-    card = DigiEggCard(name='Koromon', color=CardColor.RED, identifier='ST1-01', rarity=CardRarity.COMMON,
-                       type=DigimonType.LESSER, level=2)
-    cards = [card]
+    cards = [koromon()]
     deck = Deck(cards=cards)
     assert deck.cards == cards
 
@@ -46,8 +44,7 @@ def test_04_draw_the_last_card():
 
 
 def test_05_cannot_draw_when_there_are_no_more_cards():
-    card = koromon()
-    deck = Deck(cards=[card])
+    deck = Deck(cards=[koromon()])
     deck.draw()
     assert not deck.cards
     with raises(ValueError) as exception_info:
