@@ -68,3 +68,12 @@ def test_06_draw_many_cards():
     assert drawn_cards == [first_card, second_card]
     assert len(deck.cards) == 1
     assert deck.cards[0] == third_card
+
+
+def test_07_draw_many_cards_and_leave_the_deck_empty():
+    first_card = koromon()
+    second_card = shadow_wing()
+    deck = Deck(cards=[first_card, second_card])
+    drawn_cards = deck.draw_many(number_of_cards=2)
+    assert drawn_cards == [first_card, second_card]
+    assert not deck.cards
