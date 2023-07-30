@@ -1,24 +1,26 @@
 from src.digimon_card_game import DigimonCard, CardColor, CardRarity, DigimonForm, DigimonAttribute, DigimonType
-from tests.assertions import assert_raises_not_blank, assert_raises_not_within_range, \
+from tests.assertions import assert_attr_raises_not_blank, assert_raises_not_within_range, \
     assert_raises_not_positive
 
 
 def test_01_name_must_not_be_blank():
-    assert_raises_not_blank('name',
-                            lambda invalid_name: DigimonCard(name=invalid_name, color=CardColor.RED,
-                                                             identifier='ST1-02',
-                                                             rarity=CardRarity.COMMON, form=DigimonForm.ROOKIE,
-                                                             attribute=DigimonAttribute.VACCINE,
-                                                             type=DigimonType.BIRD, cost=2, power=3000, level=3))
+    assert_attr_raises_not_blank('name',
+                                 lambda invalid_name: DigimonCard(name=invalid_name, color=CardColor.RED,
+                                                                  identifier='ST1-02',
+                                                                  rarity=CardRarity.COMMON, form=DigimonForm.ROOKIE,
+                                                                  attribute=DigimonAttribute.VACCINE,
+                                                                  type=DigimonType.BIRD, cost=2, power=3000, level=3))
 
 
 def test_02_identifier_must_not_be_blank():
-    assert_raises_not_blank('identifier',
-                            lambda invalid_identifier: DigimonCard(name='Biyomon', color=CardColor.RED,
-                                                                   identifier=invalid_identifier,
-                                                                   rarity=CardRarity.COMMON, form=DigimonForm.ROOKIE,
-                                                                   attribute=DigimonAttribute.VACCINE,
-                                                                   type=DigimonType.BIRD, cost=2, power=3000, level=3))
+    assert_attr_raises_not_blank('identifier',
+                                 lambda invalid_identifier: DigimonCard(name='Biyomon', color=CardColor.RED,
+                                                                        identifier=invalid_identifier,
+                                                                        rarity=CardRarity.COMMON,
+                                                                        form=DigimonForm.ROOKIE,
+                                                                        attribute=DigimonAttribute.VACCINE,
+                                                                        type=DigimonType.BIRD, cost=2, power=3000,
+                                                                        level=3))
 
 
 def test_03_cost_must_be_between_zero_and_twenty():

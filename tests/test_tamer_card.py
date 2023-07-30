@@ -1,18 +1,20 @@
 from src.digimon_card_game import TamerCard, CardColor, CardRarity
-from tests.assertions import assert_raises_not_blank, assert_raises_not_within_range
+from tests.assertions import assert_attr_raises_not_blank, assert_raises_not_within_range
 
 
 def test_01_name_must_not_be_blank():
-    assert_raises_not_blank('name',
-                            lambda invalid_name: TamerCard(name=invalid_name, color=CardColor.RED, identifier='ST1-12',
-                                                           rarity=CardRarity.RARE, cost=2))
+    assert_attr_raises_not_blank('name',
+                                 lambda invalid_name: TamerCard(name=invalid_name, color=CardColor.RED,
+                                                                identifier='ST1-12',
+                                                                rarity=CardRarity.RARE, cost=2))
 
 
 def test_02_identifier_must_not_be_blank():
-    assert_raises_not_blank('identifier',
-                            lambda invalid_identifier: TamerCard(name='Tai Kamiya', color=CardColor.RED,
-                                                                 identifier=invalid_identifier, rarity=CardRarity.RARE,
-                                                                 cost=2))
+    assert_attr_raises_not_blank('identifier',
+                                 lambda invalid_identifier: TamerCard(name='Tai Kamiya', color=CardColor.RED,
+                                                                      identifier=invalid_identifier,
+                                                                      rarity=CardRarity.RARE,
+                                                                      cost=2))
 
 
 def test_03_cost_must_be_between_zero_and_twenty():

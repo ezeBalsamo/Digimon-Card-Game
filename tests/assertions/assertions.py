@@ -8,7 +8,7 @@ def assert_expected_enum_values(enum_class: Type[Enum], expected_enum_values: Se
     assert enum_values == expected_enum_values
 
 
-def assert_raises_not_blank(attr_name: str, closure: Callable[[str], Any]):
+def assert_attr_raises_not_blank(attr_name: str, closure: Callable[[str], Any]):
     for invalid_value in ['', ' ']:
         with raises(ValueError) as exception_info:
             closure(invalid_value)
