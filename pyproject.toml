@@ -8,6 +8,7 @@ packages = [{include = "digimon_card_game", from= "src"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"
+attrs = "^23.1.0"
 
 
 [tool.poetry.group.dev.dependencies]
