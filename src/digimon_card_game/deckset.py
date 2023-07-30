@@ -22,3 +22,6 @@ def validate_optional_decks(_instance: Deck, attribute: Attribute, optional_deck
 class Deckset:
     main_deck: Deck
     optional_decks: dict[str, Deck] = field(factory=dict, validator=validate_optional_decks)
+
+    def optional_deck_known_as(self, identifier: str):
+        return self.optional_decks.get(identifier, lambda: f'There is no optional deck identified by {identifier}')

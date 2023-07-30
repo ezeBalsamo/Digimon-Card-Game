@@ -20,3 +20,13 @@ def test_02_deckset_without_optional_decks():
 
     assert deckset.main_deck == main_deck
     assert not deckset.optional_decks
+
+
+def test_03_deckset_with_one_optional_deck():
+    main_deck = Deck(cards=[shadow_wing()])
+    digi_egg_deck = Deck(cards=[koromon])
+    optional_decks = {'Digi-Egg': digi_egg_deck}
+    deckset = Deckset(main_deck=main_deck, optional_decks=optional_decks)
+
+    assert deckset.optional_decks == optional_decks
+    assert deckset.optional_deck_known_as('Digi-Egg') == digi_egg_deck
