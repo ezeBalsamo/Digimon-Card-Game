@@ -77,3 +77,13 @@ def test_07_draw_many_cards_and_leave_the_deck_empty():
     drawn_cards = deck.draw_many(number_of_cards=2)
     assert drawn_cards == [first_card, second_card]
     assert not deck.cards
+
+
+def test_08_cannot_draw_many_cards_when_there_are_no_more_cards():
+    first_card = koromon()
+    deck = Deck(cards=[first_card])
+    deck.draw()
+    assert not deck.cards
+    with raises(ValueError) as exception_info:
+        deck.draw_many(number_of_cards=2)
+    assert str(exception_info.value) == 'There are no more cards in the deck.'
