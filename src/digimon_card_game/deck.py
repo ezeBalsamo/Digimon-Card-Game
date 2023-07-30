@@ -8,4 +8,6 @@ class Deck:
     cards: list[Card] = field(validator=min_len(1))
 
     def draw(self):
+        if not self.cards:
+            raise ValueError('There are no more cards in the deck.')
         return self.cards.pop(0)

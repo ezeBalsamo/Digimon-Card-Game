@@ -43,3 +43,13 @@ def test_04_draw_the_last_card():
     drawn_card = deck.draw()
     assert drawn_card == card
     assert not deck.cards
+
+
+def test_05_cannot_draw_when_there_are_no_more_cards():
+    card = koromon()
+    deck = Deck(cards=[card])
+    deck.draw()
+    assert not deck.cards
+    with raises(ValueError) as exception_info:
+        deck.draw()
+    assert str(exception_info.value) == 'There are no more cards in the deck.'
