@@ -2,7 +2,7 @@ from typing import Optional
 from attr import frozen, field
 from attr.validators import in_, optional, gt
 from src.digimon_card_game import CardColor, CardRarity, DigimonForm, DigimonAttribute, DigimonType
-from src.validators import not_blank, within_range
+from src.extensions.attrs.validators import not_blank, within_range
 
 
 @frozen(kw_only=True)
