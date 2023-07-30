@@ -1,6 +1,6 @@
 from src.digimon_card_game import DigimonCard, CardColor, CardRarity, DigimonForm, DigimonAttribute, DigimonType
 from tests.assertions import assert_attr_raises_not_blank, assert_attr_raises_not_within_range, \
-    assert_raises_not_positive
+    assert_attr_raises_not_positive
 
 
 def test_01_name_must_not_be_blank():
@@ -36,13 +36,13 @@ def test_03_cost_must_be_between_zero_and_twenty():
 
 
 def test_04_power_must_be_positive():
-    assert_raises_not_positive('power', lambda invalid_power: DigimonCard(name='Biyomon', color=CardColor.RED,
-                                                                          identifier='ST1-02',
-                                                                          rarity=CardRarity.COMMON,
-                                                                          form=DigimonForm.ROOKIE,
-                                                                          attribute=DigimonAttribute.VACCINE,
-                                                                          type=DigimonType.BIRD, cost=2,
-                                                                          power=invalid_power, level=3))
+    assert_attr_raises_not_positive('power', lambda invalid_power: DigimonCard(name='Biyomon', color=CardColor.RED,
+                                                                               identifier='ST1-02',
+                                                                               rarity=CardRarity.COMMON,
+                                                                               form=DigimonForm.ROOKIE,
+                                                                               attribute=DigimonAttribute.VACCINE,
+                                                                               type=DigimonType.BIRD, cost=2,
+                                                                               power=invalid_power, level=3))
 
 
 def test_05_level_must_be_between_two_and_seven():
