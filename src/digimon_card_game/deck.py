@@ -1,4 +1,6 @@
 from attr import frozen, field
+
+from src.assertions import assert_is_positive
 from src.digimon_card_game import Card
 from attr.validators import min_len
 
@@ -13,6 +15,7 @@ class Deck:
 
     def draw_many(self, number_of_cards):
         self.assert_is_not_empty()
+        assert_is_positive(number_of_cards, 'The number of cards to draw must be positive.')
         self.assert_can_draw_many(number_of_cards)
         drawn_cards = self.cards[:number_of_cards]
         del self.cards[:number_of_cards]

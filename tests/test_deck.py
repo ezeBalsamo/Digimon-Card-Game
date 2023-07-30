@@ -1,5 +1,5 @@
 from src.digimon_card_game import Deck
-from tests.assertions import assert_list_raises_not_minimum_length, assert_the_only_one_in
+from tests.assertions import assert_list_raises_not_minimum_length, assert_the_only_one_in, assert_raises_not_positive
 from src.cards import koromon, shadow_wing, biyomon
 
 from pytest import raises
@@ -78,3 +78,9 @@ def test_08_cannot_draw_more_cards_than_the_number_of_remaining_cards_in_deck():
     with raises(ValueError) as exception_info:
         deck.draw_many(number_of_cards=2)
     assert str(exception_info.value) == 'You cannot draw 2 cards. Number of remaining cards: 1.'
+
+
+def test_09_cannot_draw_non_positive_number_of_cards():
+    deck = Deck(cards=[koromon()])
+    assert_raises_not_positive(lambda invalid_number_of_cards: deck.draw_many(invalid_number_of_cards),
+                               'The number of cards to draw must be positive.')
