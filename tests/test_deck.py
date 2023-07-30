@@ -1,4 +1,5 @@
-from src.digimon_card_game import Deck, DigiEggCard, CardColor, CardRarity, DigimonType, OptionCard
+from src.digimon_card_game import Deck, DigiEggCard, CardColor, CardRarity, DigimonType, OptionCard, DigimonCard, \
+    DigimonForm, DigimonAttribute
 from pytest import raises
 
 
@@ -9,6 +10,12 @@ def koromon():
 
 def shadow_wing():
     return OptionCard(name='Shadow Wing', color=CardColor.RED, identifier='ST1-13', rarity=CardRarity.COMMON, cost=1)
+
+
+def biyomon():
+    return DigimonCard(name='Biyomon', color=CardColor.RED, identifier='ST1-02',
+                       rarity=CardRarity.COMMON, form=DigimonForm.ROOKIE, attribute=DigimonAttribute.VACCINE,
+                       type=DigimonType.BIRD, cost=2, power=3000, level=3)
 
 
 def test_01_cannot_create_deck_without_cards():
@@ -50,3 +57,14 @@ def test_05_cannot_draw_when_there_are_no_more_cards():
     with raises(ValueError) as exception_info:
         deck.draw()
     assert str(exception_info.value) == 'There are no more cards in the deck.'
+
+
+def test_06_draw_many_cards():
+    first_card = koromon()
+    second_card = shadow_wing()
+    third_card = biyomon()
+    deck = Deck(cards=[first_card, second_card, third_card])
+    drawn_cards = deck.draw_many(number_of_cards=2)
+    assert drawn_cards == [first_card, second_card]
+    assert len(deck.cards) == 1
+    assert deck.cards[0] == third_card
