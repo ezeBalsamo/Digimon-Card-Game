@@ -22,7 +22,7 @@ def assert_raises_not_within_range(attr_name: str, lower: int, upper: int, closu
         assert str(exception_info.value) == f'{attr_name} must be between {lower} and {upper}.'
 
 
-def assert_raises_not_strictly_positive(attr_name: str, closure: Callable[[int], Any]):
+def assert_raises_not_positive(attr_name: str, closure: Callable[[int], Any]):
     for invalid_value in [-1, 0]:
         with raises(ValueError) as exception_info:
             closure(invalid_value)
