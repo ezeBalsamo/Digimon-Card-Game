@@ -12,3 +12,11 @@ def test_01_cannot_create_deckset_with_optional_decks_with_equivalent_identifier
     with raises(ValueError) as exception_info:
         Deckset(main_deck=main_deck, optional_decks=invalid_optional_decks)
     assert str(exception_info.value) == 'optional_decks must not include equivalent identifiers (lowercase): digi-egg'
+
+
+def test_02_deckset_without_optional_decks():
+    main_deck = Deck(cards=[shadow_wing()])
+    deckset = Deckset(main_deck=main_deck)
+
+    assert deckset.main_deck == main_deck
+    assert not deckset.optional_decks
