@@ -6,3 +6,6 @@ from attr.validators import min_len
 @frozen(kw_only=True)
 class Deck:
     cards: list[Card] = field(validator=min_len(1))
+
+    def draw(self):
+        return self.cards.pop(0)
