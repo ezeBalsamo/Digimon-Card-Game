@@ -23,10 +23,18 @@ def test_02_deckset_without_optional_decks():
 
 
 def test_03_deckset_with_one_optional_deck():
-    main_deck = Deck(cards=[shadow_wing()])
     digi_egg_deck = Deck(cards=[koromon])
     optional_decks = {'Digi-Egg': digi_egg_deck}
-    deckset = Deckset(main_deck=main_deck, optional_decks=optional_decks)
+    deckset = Deckset(main_deck=Deck(cards=[shadow_wing()]), optional_decks=optional_decks)
 
     assert deckset.optional_decks == optional_decks
     assert deckset.optional_deck_known_as('Digi-Egg') == digi_egg_deck
+
+
+def test_04_should_fail_when_trying_to_get_optional_deck_with_invalid_identifier():
+    digi_egg_deck = Deck(cards=[koromon])
+    optional_decks = {'Digi-Egg': digi_egg_deck}
+    deckset = Deckset(main_deck=Deck(cards=[shadow_wing()]), optional_decks=optional_decks)
+    with raises(ValueError) as exception_info:
+        deckset.optional_deck_known_as('side')
+    assert str(exception_info.value) == 'There is no optional deck identified by side.'
