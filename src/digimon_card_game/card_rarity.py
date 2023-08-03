@@ -1,10 +1,11 @@
-from attr import frozen
+from attr import frozen, field
 from enum import Enum
+from extensions.attrs.validators import not_blank
 
 
 @frozen(kw_only=True)
 class Rarity:
-    name: str
+    name: str = field(validator=not_blank)
     identifier: str
 
     def __str__(self):
