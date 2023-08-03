@@ -3,7 +3,7 @@ from src.digimon_card_game import DigiEggCard, CardColor, CardRarity, DigimonTyp
 
 
 def koromon():
-    return DigiEggCard(name='Koromon', color=CardColor.RED, identifier='ST1-01', rarity=CardRarity.COMMON,
+    return DigiEggCard(name='Koromon', color=CardColor.RED, identifier='ST1-01', rarity=CardRarity.UNCOMMON,
                        type=DigimonType.LESSER, level=2)
 
 
