@@ -26,3 +26,8 @@ def test_03_name_must_not_be_blank():
                                  lambda invalid_name: Rarity(name=invalid_name,
                                                              identifier='C'))
 
+
+def test_04_identifier_must_not_be_blank():
+    assert_attr_raises_not_blank('identifier',
+                                 lambda invalid_identifier: Rarity(name='Common',
+                                                                   identifier=invalid_identifier))
