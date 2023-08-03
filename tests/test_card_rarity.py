@@ -1,4 +1,5 @@
 from src.digimon_card_game import Rarity, CardRarity
+from tests.assertions.attributes import assert_attr_raises_not_blank
 from tests.assertions.enum import assert_expected_enum_values
 
 
@@ -18,3 +19,15 @@ def test_02_card_rarities():
     promo = Rarity(name='Promo', identifier='P')
 
     assert_expected_enum_values(CardRarity, {common, uncommon, rare, super_rare, secret_rare, promo})
+
+
+def test_03_name_must_not_be_blank():
+    assert_attr_raises_not_blank('name',
+                                 lambda invalid_name: Rarity(name=invalid_name,
+                                                             identifier='C'))
+
+
+def test_04_identifier_must_not_be_blank():
+    assert_attr_raises_not_blank('identifier',
+                                 lambda invalid_identifier: Rarity(name='Common',
+                                                                   identifier=invalid_identifier))
