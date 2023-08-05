@@ -11,7 +11,10 @@ def test_01_cannot_create_duelist_with_blank_name():
 
 
 def test_02_instance_creation_and_accessing():
-    duelist = Duelist(name='Pepe Sand',
-                      deckset=Deckset(main_deck=Deck(cards=[shadow_wing()])))
-    assert duelist.name == 'Pepe Sand'
-    assert duelist.deckset == Deckset(main_deck=Deck(cards=[shadow_wing()]))
+    name = 'Pepe Sand'
+    deck = Deck(cards=[shadow_wing()])
+    deckset = Deckset(main_deck=deck)
+    duelist = Duelist(name=name,
+                      deckset=deckset)
+    assert duelist.name == name
+    assert duelist.deckset == deckset
