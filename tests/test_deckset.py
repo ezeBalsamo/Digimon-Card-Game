@@ -15,11 +15,10 @@ def test_01_cannot_create_deckset_with_optional_decks_with_equivalent_identifier
     assert str(exception_info.value) == 'optional_decks must not include equivalent identifiers (lowercase): digi-egg'
 
 
-def test_02_cannot_create_deckset_with_blank_name():
+def test_02_name_must_not_be_blank():
     assert_attr_raises_not_blank('name',
                                  lambda invalid_name: Deckset(name=invalid_name,
-                                                              main_deck=Deck(cards=[shadow_wing()]),
-                                                              optional_decks={'Digi-Egg': Deck(cards=[koromon])}))
+                                                              main_deck=Deck(cards=[shadow_wing()])))
 
 
 def test_03_deckset_without_optional_decks():
