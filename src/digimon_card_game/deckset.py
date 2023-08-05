@@ -1,5 +1,6 @@
 from attr import frozen, field, Attribute
 
+from extensions.attrs.validators import not_blank
 from src.digimon_card_game import Deck
 
 
@@ -20,6 +21,7 @@ def validate_optional_decks(_instance: Deck, attribute: Attribute, optional_deck
 
 @frozen(kw_only=True)
 class Deckset:
+    name: str = field(validator=not_blank)
     main_deck: Deck
     optional_decks: dict[str, Deck] = field(factory=dict, validator=validate_optional_decks)
 
