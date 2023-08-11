@@ -1,5 +1,5 @@
-from src.digimon_card_game import DigimonAttribute
-from tests.assertions.enum import assert_expected_enum_values
+from digimon_card_game.cards.information import DigimonAttribute
+from .assertions import assert_expected_enum_values
 
 
 def test_01_digimon_attributes():

@@ -1,5 +1,6 @@
-from src.digimon_card_game import OptionCard, CardColor, CardRarity
-from tests.assertions.attributes import assert_attr_raises_not_blank, assert_attr_raises_not_within_range
+from digimon_card_game.cards.information import CardColor, CardRarity
+from digimon_card_game.cards import OptionCard
+from .assertions import assert_attr_raises_not_blank, assert_attr_raises_not_within_range
 
 
 def test_01_name_must_not_be_blank():

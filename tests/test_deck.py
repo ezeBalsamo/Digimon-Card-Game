@@ -1,8 +1,6 @@
-from src.digimon_card_game import Deck
-from src.cards import koromon, shadow_wing, biyomon
-from tests.assertions.list import assert_list_raises_not_minimum_length, assert_the_only_one_in
-from tests.assertions.number import assert_raises_not_positive
-
+from digimon_card_game.decks import Deck
+from digimon_card_game.cards import koromon, shadow_wing, biyomon
+from .assertions import assert_list_raises_not_minimum_length, assert_the_only_one_in, assert_raises_not_positive
 from pytest import raises
 
 

@@ -1,7 +1,7 @@
 from attr import frozen, field, Attribute
 
-from extensions.attrs.validators import not_blank
-from src.digimon_card_game import Deck
+from ..extensions.attrs.validators import not_blank
+from . import Deck
 
 
 def validate_optional_decks(_instance: Deck, attribute: Attribute, optional_decks: dict[str, Deck]):
