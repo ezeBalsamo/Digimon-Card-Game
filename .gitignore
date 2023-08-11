@@ -4,3 +4,6 @@
 # Pytest
 .coverage
 coverage.xml
+
+# Python
+.venv
