@@ -1,7 +1,7 @@
 from attr import frozen, field
 
-from src.assertions import assert_is_positive
-from src.digimon_card_game import Card
+from ..assertions import assert_is_positive
+from ..cards import Card
 from attr.validators import min_len
 
 

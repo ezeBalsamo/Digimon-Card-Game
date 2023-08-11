@@ -1,4 +1,4 @@
-from src.digimon_card_game import Rarity, CardRarity
+from digimon_card_game.cards.information import Rarity, CardRarity
 from tests.assertions.attributes import assert_attr_raises_not_blank
 from tests.assertions.enum import assert_expected_enum_values
 

@@ -1,8 +1,8 @@
 from typing import Optional
 from attr import frozen, field
 from attr.validators import in_, optional, gt
-from src.digimon_card_game import CardColor, CardRarity, DigimonForm, DigimonAttribute, DigimonType
-from src.extensions.attrs.validators import not_blank, within_range
+from .information import CardColor, CardRarity, DigimonForm, DigimonAttribute, DigimonType
+from ..extensions.attrs.validators import not_blank, within_range
 
 
 @frozen(kw_only=True)
@@ -10,7 +10,7 @@ class DigimonCard:
     name: str = field(validator=not_blank)
     color: CardColor = field(validator=in_(CardColor))
     identifier: str = field(validator=not_blank)
-    rarity: CardRarity = field(validator=in_(CardRarity))
+    rarity: CardRarity = field(validator=in_(CardRarity))  # type: ignore
     form: DigimonForm = field(validator=in_(DigimonForm))
     attribute: DigimonAttribute = field(validator=in_(DigimonAttribute))
     type: DigimonType = field(validator=in_(DigimonType))

@@ -1,7 +1,7 @@
 from pytest import raises
-from src.cards import shadow_wing, koromon
-from src.digimon_card_game import Deck, Deckset
-from tests.assertions.attributes import assert_attr_raises_not_blank
+from digimon_card_game.cards import shadow_wing, koromon
+from digimon_card_game.decks import Deck, Deckset
+from .assertions import assert_attr_raises_not_blank
 
 
 def test_01_cannot_create_deckset_with_optional_decks_with_equivalent_identifiers():

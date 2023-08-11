@@ -1,5 +1,6 @@
-from src.digimon_card_game import DigimonCard, CardColor, CardRarity, DigimonForm, DigimonAttribute, DigimonType
-from tests.assertions.attributes import assert_attr_raises_not_blank, assert_attr_raises_not_within_range, \
+from digimon_card_game.cards.information import CardColor, CardRarity, DigimonForm, DigimonAttribute, DigimonType
+from digimon_card_game.cards import DigimonCard
+from .assertions import assert_attr_raises_not_blank, assert_attr_raises_not_within_range, \
     assert_attr_raises_not_positive
 
 

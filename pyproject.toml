@@ -4,7 +4,7 @@ version = "0.1.0"
 description = ""
 authors = ["ezeBalsamo <alexander.ezequiel.balsamo@gmail.com>"]
 readme = "README.md"
-packages = [{include = "digimon_card_game", from= "src"}]
+packages = [{include = "digimon_card_game"}, {include = "tests"}]
 
 [tool.poetry.dependencies]
 python = "^3.11"

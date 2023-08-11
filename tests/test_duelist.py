@@ -1,7 +1,7 @@
-from cards import shadow_wing
-from digimon_card_game import Deckset, Deck
-from duels import Duelist
-from tests.assertions.attributes import assert_attr_raises_not_blank
+from digimon_card_game.cards import shadow_wing
+from digimon_card_game.decks import Deck, Deckset
+from digimon_card_game.duels import Duelist
+from .assertions import assert_attr_raises_not_blank
 
 
 def deckset():

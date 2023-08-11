@@ -1,6 +1,6 @@
 from attr import frozen, field
 from enum import Enum
-from extensions.attrs.validators import not_blank
+from ...extensions.attrs.validators import not_blank
 
 
 @frozen(kw_only=True)

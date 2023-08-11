@@ -1,7 +1,6 @@
 from typing import Callable, Any
 from pytest import raises
-
-from tests.assertions.number import assert_raises_not_positive_because
+from ..number import assert_raises_not_positive_because
 
 
 def assert_attr_raises_not_blank(attr_name: str, closure: Callable[[str], Any]):
