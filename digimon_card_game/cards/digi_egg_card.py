@@ -10,7 +10,7 @@ class DigiEggCard:
     name: str = field(validator=not_blank)
     color: CardColor = field(validator=in_(CardColor))
     identifier: str = field(validator=not_blank)
-    rarity: CardRarity = field(validator=in_(CardRarity))
+    rarity: CardRarity = field(validator=in_(CardRarity))  # type: ignore
     type: DigimonType = field(validator=in_(DigimonType))
     level: Optional[int] = field(default=None, validator=optional(within_range(lower=2, upper=7)))
 

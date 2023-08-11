@@ -10,5 +10,5 @@ class TamerCard:
     name: str = field(validator=not_blank)
     color: CardColor = field(validator=in_(CardColor))
     identifier: str = field(validator=not_blank)
-    rarity: CardRarity = field(validator=in_(CardRarity))
+    rarity: CardRarity = field(validator=in_(CardRarity))  # type: ignore
     cost: int = field(validator=within_range(0, 20))

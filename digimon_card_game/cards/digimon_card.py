@@ -10,7 +10,7 @@ class DigimonCard:
     name: str = field(validator=not_blank)
     color: CardColor = field(validator=in_(CardColor))
     identifier: str = field(validator=not_blank)
-    rarity: CardRarity = field(validator=in_(CardRarity))
+    rarity: CardRarity = field(validator=in_(CardRarity))  # type: ignore
     form: DigimonForm = field(validator=in_(DigimonForm))
     attribute: DigimonAttribute = field(validator=in_(DigimonAttribute))
     type: DigimonType = field(validator=in_(DigimonType))
