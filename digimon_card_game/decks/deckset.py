@@ -1,10 +1,10 @@
+from typing import Any
 from attr import frozen, field, Attribute
-
 from ..extensions.attrs.validators import not_blank
 from . import Deck
 
 
-def validate_optional_decks(_instance: Deck, attribute: Attribute, optional_decks: dict[str, Deck]):
+def validate_optional_decks(_instance: Any, attribute: Attribute, optional_decks: dict[str, Deck]):
     lowercase_identifiers = {}
     duplicate_identifiers = set()
 
@@ -30,3 +30,6 @@ class Deckset:
             return self.optional_decks[identifier]
         except KeyError:
             raise ValueError(f'There is no optional deck identified by {identifier}.')
+
+    def all_decks(self) -> list[Deck]:
+        return [self.main_deck] + list(self.optional_decks.values())

@@ -1,5 +1,5 @@
-from . import DigiEggCard, OptionCard, DigimonCard
-from .information import CardColor, CardRarity, DigimonType, DigimonForm, DigimonAttribute
+from ..cards import DigiEggCard, OptionCard, DigimonCard
+from ..cards.information import CardColor, CardRarity, DigimonType, DigimonForm, DigimonAttribute
 
 
 def koromon():
