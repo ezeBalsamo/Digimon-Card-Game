@@ -14,7 +14,7 @@ def assert_raises_no_more_cards(closure: Callable[[], Any]) -> None:
     assert str(exception_info.value) == 'There are no more cards.'
 
 
-def test_01_cannot_create_deck_without_cards() -> None:
+def test_01_cannot_create_deck_without_cards():
     assert_list_raises_not_minimum_length('cards', 1, lambda invalid_cards: Deck(cards=invalid_cards))
 
 

@@ -8,7 +8,7 @@ class Rarity:
     name: str = field(validator=not_blank)
     identifier: str = field(validator=not_blank)
 
-    def __str__(self):
+    def __str__(self) -> str:
         return self.name
 
 
