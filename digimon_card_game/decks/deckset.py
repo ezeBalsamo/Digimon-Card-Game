@@ -4,7 +4,8 @@ from ..extensions.attrs.validators import not_blank
 from . import Deck
 
 
-def validate_optional_decks(_instance: Deckset, attribute: Attribute, optional_decks: dict[str, Deck]):
+def validate_optional_decks(_instance: Deckset, attribute: Attribute[dict[str, Deck]],
+                            optional_decks: dict[str, Deck]) -> None:
     lowercase_identifiers = [identifier.lower() for identifier in optional_decks]
     equivalent_identifiers = set(
         identifier for identifier in lowercase_identifiers if lowercase_identifiers.count(identifier) > 1)
@@ -21,7 +22,7 @@ class Deckset:
     main_deck: Deck
     optional_decks: dict[str, Deck] = field(factory=dict, validator=validate_optional_decks)
 
-    def optional_deck_known_as(self, identifier: str):
+    def optional_deck_known_as(self, identifier: str) -> Deck:
         try:
             return self.optional_decks[identifier]
         except KeyError:

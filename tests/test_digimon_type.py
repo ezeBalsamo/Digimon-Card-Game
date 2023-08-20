@@ -2,7 +2,7 @@ from digimon_card_game.cards.information import DigimonType
 from .assertions import assert_expected_enum_values
 
 
-def test_01_digimon_types():
+def test_01_digimon_types() -> None:
     assert_expected_enum_values(DigimonType, {"9000",
                                               "AA Defense Agent",
                                               "Ability Synthesis Agent",
