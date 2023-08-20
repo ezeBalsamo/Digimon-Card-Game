@@ -28,3 +28,6 @@ class Banlist:
 
     def is_deck_allowed(self, deck: Deck) -> bool:
         return all(self.is_card_allowed(card, deck.cards.count(card)) for card in deck.cards)
+
+    def is_deckset_allowed(self, deckset: Deckset) -> bool:
+        return all(self.is_deck_allowed(deck) for deck in deckset.all_decks())
