@@ -5,16 +5,15 @@ from digimon_card_game.decks import Deckset, Deck
 from .assertions import assert_dict_raises_not_minimum_length
 from pytest import raises
 
-
 shadow_wing = shadow_wing()
 biyomon = biyomon()
 
 
 def test_01_cannot_create_banlist_without_cards():
     assert_dict_raises_not_minimum_length('number_of_copies_by_card', 1,
-                                          lambda invalid_cards: Banlist(
+                                          lambda invalid_number_of_copies_by_card: Banlist(
                                               date=date.today(),
-                                              number_of_copies_by_card=invalid_cards))
+                                              number_of_copies_by_card=invalid_number_of_copies_by_card))
 
 
 def test_02_cannot_create_banlist_with_negative_number_of_cards():
@@ -45,21 +44,21 @@ def test_04_card_is_allowed_when_not_in_the_banlist():
     assert banlist.is_card_allowed(shadow_wing, 1)
 
 
-def test_05_card_is_allowed_when_is_in_the_banlist_but_number_of_copies_is_lower_than_the_allowed():
+def test_05_card_is_allowed_when_is_in_the_banlist_and_number_of_copies_is_lower_than_the_allowed():
     number_of_copies_by_card = {shadow_wing: 3}
     banlist = Banlist(date=date.today(), number_of_copies_by_card=number_of_copies_by_card)
 
     assert banlist.is_card_allowed(shadow_wing, 1)
 
 
-def test_06_card_is_allowed_when_is_in_the_banlist_but_number_of_copies_equals_the_allowed():
+def test_06_card_is_allowed_when_is_in_the_banlist_and_number_of_copies_equals_the_allowed():
     number_of_copies_by_card = {shadow_wing: 3}
     banlist = Banlist(date=date.today(), number_of_copies_by_card=number_of_copies_by_card)
 
     assert banlist.is_card_allowed(shadow_wing, 3)
 
 
-def test_07_card_is_not_allowed_when_is_in_the_banlist_but_number_of_copies_is_greater_than_the_allowed():
+def test_07_card_is_not_allowed_when_is_in_the_banlist_and_number_of_copies_is_greater_than_the_allowed():
     number_of_copies_by_card = {biyomon: 0}
     banlist = Banlist(date=date.today(), number_of_copies_by_card=number_of_copies_by_card)
 
@@ -74,7 +73,7 @@ def test_08_deck_is_allowed_when_all_cards_are_allowed():
     banlist = Banlist(date=date.today(), number_of_copies_by_card=number_of_copies_by_card)
     deck = Deck(cards=[shadow_wing])
 
-    assert banlist.is_deck_allowed(deck) is True
+    assert banlist.is_deck_allowed(deck)
 
 
 def test_09_deck_is_not_allowed_when_at_least_one_card_is_not_allowed():
