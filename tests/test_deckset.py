@@ -7,8 +7,8 @@ from .assertions import assert_attr_raises_not_blank
 def test_01_cannot_create_deckset_with_optional_decks_with_equivalent_identifiers():
     main_deck = Deck(cards=[shadow_wing()])
     invalid_optional_decks = {
-        'Digi-Egg': Deck(cards=[koromon]),
-        'Digi-EGG': Deck(cards=[koromon])
+        'Digi-Egg': Deck(cards=[koromon()]),
+        'Digi-EGG': Deck(cards=[koromon()])
     }
     with raises(ValueError) as exception_info:
         Deckset(name='Starter Deck', main_deck=main_deck, optional_decks=invalid_optional_decks)
@@ -31,7 +31,7 @@ def test_03_deckset_without_optional_decks():
 
 
 def test_04_deckset_with_one_optional_deck():
-    digi_egg_deck = Deck(cards=[koromon])
+    digi_egg_deck = Deck(cards=[koromon()])
     optional_decks = {'Digi-Egg': digi_egg_deck}
     deckset = Deckset(name='Starter Deck', main_deck=Deck(cards=[shadow_wing()]), optional_decks=optional_decks)
 
@@ -41,7 +41,7 @@ def test_04_deckset_with_one_optional_deck():
 
 
 def test_05_should_fail_when_trying_to_get_optional_deck_with_invalid_identifier():
-    digi_egg_deck = Deck(cards=[koromon])
+    digi_egg_deck = Deck(cards=[koromon()])
     optional_decks = {'Digi-Egg': digi_egg_deck}
     deckset = Deckset(name='Starter Deck', main_deck=Deck(cards=[shadow_wing()]), optional_decks=optional_decks)
     with raises(ValueError) as exception_info:
