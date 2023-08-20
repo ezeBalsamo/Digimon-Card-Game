@@ -2,7 +2,7 @@ from datetime import date
 from digimon_card_game.banlists.banlist import Banlist
 from digimon_card_game.cards import shadow_wing, biyomon, koromon
 from digimon_card_game.decks import Deckset, Deck
-from tests.assertions.dictionary.assertions import assert_dict_raises_not_minimum_length
+from .assertions import assert_dict_raises_not_minimum_length
 from pytest import raises
 
 
