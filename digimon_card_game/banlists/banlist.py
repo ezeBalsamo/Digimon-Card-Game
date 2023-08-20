@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Any
 from attr import frozen, field, Attribute
 from ..cards import Card
@@ -6,8 +7,8 @@ from datetime import date
 from ..decks import Deckset, Deck
 
 
-def validate_non_negative_number_of_copies(_instance: Any, attribute: Attribute,
-                                           number_of_copies_by_card: dict[Card, int]):
+def validate_non_negative_number_of_copies(_instance: Any, attribute: Attribute[dict[Card, int]],
+                                           number_of_copies_by_card: dict[Card, int]) -> None:
     if any(value < 0 for value in number_of_copies_by_card.values()):
         raise ValueError(f"{attribute.name} must not include negative values.")
 
