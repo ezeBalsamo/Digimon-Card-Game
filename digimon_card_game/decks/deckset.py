@@ -1,22 +1,18 @@
+from __future__ import annotations
 from attr import frozen, field, Attribute
-
 from ..extensions.attrs.validators import not_blank
 from . import Deck
 
 
-def validate_optional_decks(_instance: Deck, attribute: Attribute, optional_decks: dict[str, Deck]):
-    lowercase_identifiers = {}
-    duplicate_identifiers = set()
+def validate_optional_decks(_instance: Deckset, attribute: Attribute, optional_decks: dict[str, Deck]):
+    lowercase_identifiers = [identifier.lower() for identifier in optional_decks]
+    equivalent_identifiers = set(
+        identifier for identifier in lowercase_identifiers if lowercase_identifiers.count(identifier) > 1)
 
-    for identifier in optional_decks:
-        lowercase_identifier = identifier.lower()
-        if lowercase_identifier in lowercase_identifiers:
-            duplicate_identifiers.add(lowercase_identifiers[lowercase_identifier])
-        lowercase_identifiers[lowercase_identifier] = lowercase_identifier
-
-    if duplicate_identifiers:
+    if equivalent_identifiers:
         raise ValueError(
-            f"{attribute.name} must not include equivalent identifiers (lowercase): {', '.join(duplicate_identifiers)}")
+            f"{attribute.name} must not include equivalent identifiers (lowercase): {', '.join(equivalent_identifiers)}"
+        )
 
 
 @frozen(kw_only=True)
