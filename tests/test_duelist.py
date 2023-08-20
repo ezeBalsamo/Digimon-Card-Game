@@ -1,11 +1,11 @@
-from digimon_card_game.cards import shadow_wing
+from digimon_card_game.seeders import card_seeder
 from digimon_card_game.decks import Deck, Deckset
 from digimon_card_game.duels import Duelist
 from .assertions import assert_attr_raises_not_blank
 
 
 def deckset() -> Deckset:
-    return Deckset(name='Starter Deck', main_deck=Deck(cards=[shadow_wing()]))
+    return Deckset(name='Starter Deck', main_deck=Deck(cards=[card_seeder.shadow_wing()]))
 
 
 def test_01_cannot_create_duelist_with_blank_name() -> None:
