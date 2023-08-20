@@ -16,6 +16,10 @@ pytest = "^7.4.0"
 pytest-cov = "^4.1.0"
 mypy = "1.5.1"
 
+[[tool.mypy.overrides]]
+module = "digimon_card_game.*"
+implicit_reexport = true
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
