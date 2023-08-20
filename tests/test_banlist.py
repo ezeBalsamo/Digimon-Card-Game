@@ -78,3 +78,25 @@ def test_07_card_is_not_allowed_when_is_in_the_banlist_but_number_of_copies_is_g
     banlist = Banlist(date=date.today(), number_of_copies_by_card=number_of_copies_by_card)
 
     assert not banlist.is_card_allowed(biyomon(), 3)
+
+
+def test_08_deck_is_allowed_when_all_cards_are_allowed():
+    number_of_copies_by_card = banned_cards(
+        (shadow_wing(), 3),
+        (biyomon(), 0)
+    )
+    banlist = Banlist(date=date.today(), number_of_copies_by_card=number_of_copies_by_card)
+    deck = Deck(cards=[shadow_wing()])
+
+    assert banlist.is_deck_allowed(deck) is True
+
+
+def test_09_deck_is_not_allowed_when_at_least_one_card_is_not_allowed():
+    number_of_copies_by_card = banned_cards(
+        (shadow_wing(), 3),
+        (biyomon(), 0)
+    )
+    banlist = Banlist(date=date.today(), number_of_copies_by_card=number_of_copies_by_card)
+    deck = Deck(cards=[biyomon()])
+
+    assert not banlist.is_deck_allowed(deck)

@@ -25,3 +25,6 @@ class Banlist:
 
     def is_card_allowed(self, card: Card, number_of_copies: int) -> bool:
         return not self.is_card_restricted(card) or number_of_copies <= self.allowed_number_of_copies_of(card)
+
+    def is_deck_allowed(self, deck: Deck) -> bool:
+        return all(self.is_card_allowed(card, deck.cards.count(card)) for card in deck.cards)
