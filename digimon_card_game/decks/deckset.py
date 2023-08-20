@@ -30,3 +30,6 @@ class Deckset:
             return self.optional_decks[identifier]
         except KeyError:
             raise ValueError(f'There is no optional deck identified by {identifier}.')
+
+    def all_decks(self) -> list[Deck]:
+        return [self.main_deck] + list(self.optional_decks.values())
