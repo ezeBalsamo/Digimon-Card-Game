@@ -6,7 +6,7 @@ from tests.assertions.dictionary.assertions import assert_dict_raises_not_minimu
 from pytest import raises
 
 
-def banned_cards(*args):
+def allowed_copies_by_card(*args):
     my_dict = {}
     for arg in args:
         key, value = arg
@@ -23,7 +23,7 @@ def test_01_cannot_create_banlist_without_cards():
 
 def test_02_cannot_create_banlist_with_negative_number_of_cards():
     today = date.today()
-    invalid_number_of_copies_by_card = banned_cards(
+    invalid_number_of_copies_by_card = allowed_copies_by_card(
         (shadow_wing(), -1)
     )
 
@@ -34,7 +34,7 @@ def test_02_cannot_create_banlist_with_negative_number_of_cards():
 
 def test_03_instance_creation_and_accessing():
     today = date.today()
-    number_of_copies_by_card = banned_cards(
+    number_of_copies_by_card = allowed_copies_by_card(
         (shadow_wing(), 3),
         (biyomon(), 0)
     )
@@ -45,7 +45,7 @@ def test_03_instance_creation_and_accessing():
 
 
 def test_04_card_is_allowed_when_not_in_the_banlist():
-    number_of_copies_by_card = banned_cards(
+    number_of_copies_by_card = allowed_copies_by_card(
         (biyomon(), 0)
     )
     banlist = Banlist(date=date.today(), number_of_copies_by_card=number_of_copies_by_card)
@@ -54,7 +54,7 @@ def test_04_card_is_allowed_when_not_in_the_banlist():
 
 
 def test_05_card_is_allowed_when_is_in_the_banlist_but_number_of_copies_is_lower_than_the_allowed():
-    number_of_copies_by_card = banned_cards(
+    number_of_copies_by_card = allowed_copies_by_card(
         (shadow_wing(), 3)
     )
     banlist = Banlist(date=date.today(), number_of_copies_by_card=number_of_copies_by_card)
@@ -63,7 +63,7 @@ def test_05_card_is_allowed_when_is_in_the_banlist_but_number_of_copies_is_lower
 
 
 def test_06_card_is_allowed_when_is_in_the_banlist_but_number_of_copies_equals_the_allowed():
-    number_of_copies_by_card = banned_cards(
+    number_of_copies_by_card = allowed_copies_by_card(
         (shadow_wing(), 3)
     )
     banlist = Banlist(date=date.today(), number_of_copies_by_card=number_of_copies_by_card)
@@ -72,7 +72,7 @@ def test_06_card_is_allowed_when_is_in_the_banlist_but_number_of_copies_equals_t
 
 
 def test_07_card_is_not_allowed_when_is_in_the_banlist_but_number_of_copies_is_greater_than_the_allowed():
-    number_of_copies_by_card = banned_cards(
+    number_of_copies_by_card = allowed_copies_by_card(
         (biyomon(), 0)
     )
     banlist = Banlist(date=date.today(), number_of_copies_by_card=number_of_copies_by_card)
@@ -81,7 +81,7 @@ def test_07_card_is_not_allowed_when_is_in_the_banlist_but_number_of_copies_is_g
 
 
 def test_08_deck_is_allowed_when_all_cards_are_allowed():
-    number_of_copies_by_card = banned_cards(
+    number_of_copies_by_card = allowed_copies_by_card(
         (shadow_wing(), 3),
         (biyomon(), 0)
     )
@@ -92,7 +92,7 @@ def test_08_deck_is_allowed_when_all_cards_are_allowed():
 
 
 def test_09_deck_is_not_allowed_when_at_least_one_card_is_not_allowed():
-    number_of_copies_by_card = banned_cards(
+    number_of_copies_by_card = allowed_copies_by_card(
         (shadow_wing(), 3),
         (biyomon(), 0)
     )
@@ -103,7 +103,7 @@ def test_09_deck_is_not_allowed_when_at_least_one_card_is_not_allowed():
 
 
 def test_10_deckset_is_not_allowed_if_main_deck_is_not_allowed():
-    number_of_copies_by_card = banned_cards(
+    number_of_copies_by_card = allowed_copies_by_card(
         (biyomon(), 0)
     )
     banlist = Banlist(date=date.today(), number_of_copies_by_card=number_of_copies_by_card)
@@ -114,7 +114,7 @@ def test_10_deckset_is_not_allowed_if_main_deck_is_not_allowed():
 
 
 def test_11_deckset_is_not_allowed_if_at_least_one_the_optional_decks_is_not_allowed():
-    number_of_copies_by_card = banned_cards(
+    number_of_copies_by_card = allowed_copies_by_card(
         (shadow_wing(), 3),
         (biyomon(), 0)
     )
@@ -128,7 +128,7 @@ def test_11_deckset_is_not_allowed_if_at_least_one_the_optional_decks_is_not_all
 
 
 def test_12_deckset_is_allowed_if_all_decks_are_allowed():
-    number_of_copies_by_card = banned_cards(
+    number_of_copies_by_card = allowed_copies_by_card(
         (shadow_wing(), 3),
         (biyomon(), 0)
     )
