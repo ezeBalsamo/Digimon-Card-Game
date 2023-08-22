@@ -10,6 +10,15 @@ def assert_list_raises_not_minimum_length(attr_name: str, minimum_length: int,
     assert str(exception_info.value) == f"Length of '{attr_name}' must be => {minimum_length}: {len(invalid_list)}"
 
 
+def assert_frozenset_raises_not_minimum_length(attr_name: str, minimum_length: int,
+                                               closure: Callable[[frozenset[Any]], Any]) -> None:
+    invalid_collection = frozenset(range(minimum_length - 1))
+    with raises(ValueError) as exception_info:
+        closure(invalid_collection)
+    assert str(
+        exception_info.value) == f"Length of '{attr_name}' must be => {minimum_length}: {len(invalid_collection)}"
+
+
 def with_the_only_one_in(collection: list[Any], closure: Callable[[Any], None]) -> None:
     assert len(collection) == 1
     closure(collection[0])

@@ -8,10 +8,11 @@ def koromon() -> DigiEggCard:
 
 
 def shadow_wing() -> OptionCard:
-    return OptionCard(name='Shadow Wing', color=CardColor.RED, identifier='ST1-13', rarity=CardRarity.COMMON, cost=1)
+    return OptionCard(name='Shadow Wing', colors=frozenset([CardColor.RED]), identifier='ST1-13',
+                      rarity=CardRarity.COMMON, cost=1)
 
 
 def biyomon() -> DigimonCard:
-    return DigimonCard(name='Biyomon', color=CardColor.RED, identifier='ST1-02',
+    return DigimonCard(name='Biyomon', colors=frozenset([CardColor.RED]), identifier='ST1-02',
                        rarity=CardRarity.COMMON, form=DigimonForm.ROOKIE, attribute=DigimonAttribute.VACCINE,
                        type=DigimonType.BIRD, cost=2, power=3000, level=3)
