@@ -1,12 +1,16 @@
+from pytest import raises
+from typing import Any
 from digimon_card_game.cards.information import CardColor, CardRarity, DigimonForm, DigimonAttribute, DigimonType
 from digimon_card_game.cards import DigimonCard
 from .assertions import assert_attr_raises_not_blank, assert_attr_raises_not_within_range, \
-    assert_attr_raises_not_positive
+    assert_attr_raises_not_positive, assert_frozenset_raises_not_minimum_length
+
+colors = frozenset([CardColor.RED])
 
 
 def test_01_name_must_not_be_blank() -> None:
     assert_attr_raises_not_blank('name',
-                                 lambda invalid_name: DigimonCard(name=invalid_name, color=CardColor.RED,
+                                 lambda invalid_name: DigimonCard(name=invalid_name, colors=colors,
                                                                   identifier='ST1-02',
                                                                   rarity=CardRarity.COMMON, form=DigimonForm.ROOKIE,
                                                                   attribute=DigimonAttribute.VACCINE,
@@ -15,7 +19,7 @@ def test_01_name_must_not_be_blank() -> None:
 
 def test_02_identifier_must_not_be_blank() -> None:
     assert_attr_raises_not_blank('identifier',
-                                 lambda invalid_identifier: DigimonCard(name='Biyomon', color=CardColor.RED,
+                                 lambda invalid_identifier: DigimonCard(name='Biyomon', colors=colors,
                                                                         identifier=invalid_identifier,
                                                                         rarity=CardRarity.COMMON,
                                                                         form=DigimonForm.ROOKIE,
@@ -26,7 +30,7 @@ def test_02_identifier_must_not_be_blank() -> None:
 
 def test_03_cost_must_be_between_zero_and_twenty() -> None:
     assert_attr_raises_not_within_range('cost', 0, 20,
-                                        lambda invalid_cost: DigimonCard(name='Biyomon', color=CardColor.RED,
+                                        lambda invalid_cost: DigimonCard(name='Biyomon', colors=colors,
                                                                          identifier='ST1-02',
                                                                          rarity=CardRarity.COMMON,
                                                                          form=DigimonForm.ROOKIE,
@@ -37,7 +41,7 @@ def test_03_cost_must_be_between_zero_and_twenty() -> None:
 
 
 def test_04_power_must_be_positive() -> None:
-    assert_attr_raises_not_positive('power', lambda invalid_power: DigimonCard(name='Biyomon', color=CardColor.RED,
+    assert_attr_raises_not_positive('power', lambda invalid_power: DigimonCard(name='Biyomon', colors=colors,
                                                                                identifier='ST1-02',
                                                                                rarity=CardRarity.COMMON,
                                                                                form=DigimonForm.ROOKIE,
@@ -48,7 +52,7 @@ def test_04_power_must_be_positive() -> None:
 
 def test_05_level_must_be_between_two_and_seven() -> None:
     assert_attr_raises_not_within_range('level', 2, 7,
-                                        lambda invalid_level: DigimonCard(name='Biyomon', color=CardColor.RED,
+                                        lambda invalid_level: DigimonCard(name='Biyomon', colors=colors,
                                                                           identifier='ST1-02',
                                                                           rarity=CardRarity.COMMON,
                                                                           form=DigimonForm.ROOKIE,
@@ -57,12 +61,42 @@ def test_05_level_must_be_between_two_and_seven() -> None:
                                                                           power=3000, level=invalid_level))
 
 
-def test_06_instance_creation_and_accessing() -> None:
-    card = DigimonCard(name='Biyomon', color=CardColor.RED, identifier='ST1-02',
+def test_06_colors_must_be_elements_of_card_color_enum() -> None:
+    invalid_colors: frozenset[Any] = frozenset([CardRarity.COMMON])
+    with raises(ValueError) as exception_info:
+        DigimonCard(name='Biyomon',
+                    colors=invalid_colors,
+                    identifier='ST1-02',
+                    rarity=CardRarity.COMMON,
+                    form=DigimonForm.ROOKIE,
+                    attribute=
+                    DigimonAttribute.VACCINE,
+                    type=DigimonType.BIRD,
+                    cost=2,
+                    power=3000, level=3)
+    assert str(exception_info.value) == 'colors: all elements must be a member of CardColor enum.'
+
+
+def test_07_cannot_create_card_without_color() -> None:
+    assert_frozenset_raises_not_minimum_length('colors', 1,
+                                               lambda invalid_colors: DigimonCard(name='Biyomon',
+                                                                                  colors=invalid_colors,
+                                                                                  identifier='ST1-02',
+                                                                                  rarity=CardRarity.COMMON,
+                                                                                  form=DigimonForm.ROOKIE,
+                                                                                  attribute=
+                                                                                  DigimonAttribute.VACCINE,
+                                                                                  type=DigimonType.BIRD,
+                                                                                  cost=2,
+                                                                                  power=3000, level=3))
+
+
+def test_08_instance_creation_and_accessing() -> None:
+    card = DigimonCard(name='Biyomon', colors=colors, identifier='ST1-02',
                        rarity=CardRarity.COMMON, form=DigimonForm.ROOKIE, attribute=DigimonAttribute.VACCINE,
                        type=DigimonType.BIRD, cost=2, power=3000, level=3)
     assert card.name == 'Biyomon'
-    assert card.color == CardColor.RED
+    assert card.colors == colors
     assert card.identifier == 'ST1-02'
     assert card.rarity == CardRarity.COMMON
     assert card.form == DigimonForm.ROOKIE
@@ -73,8 +107,8 @@ def test_06_instance_creation_and_accessing() -> None:
     assert card.level == 3
 
 
-def test_07_instance_creation_without_level() -> None:
-    card_without_level = DigimonCard(name='Biyomon', color=CardColor.RED, identifier='ST1-02',
+def test_09_instance_creation_without_level() -> None:
+    card_without_level = DigimonCard(name='Biyomon', colors=colors, identifier='ST1-02',
                                      rarity=CardRarity.COMMON, form=DigimonForm.ROOKIE,
                                      attribute=DigimonAttribute.VACCINE,
                                      type=DigimonType.BIRD, cost=2, power=3000)
