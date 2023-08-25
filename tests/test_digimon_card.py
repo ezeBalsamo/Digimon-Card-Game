@@ -92,7 +92,23 @@ def test_07_cannot_create_card_without_color() -> None:
                                                                                   power=3000, level=3))
 
 
-def test_08_instance_creation_and_accessing() -> None:
+def test_08_types_must_be_elements_of_digimon_type_enum() -> None:
+    invalid_types: frozenset[Any] = frozenset([CardRarity.COMMON])
+    with raises(ValueError) as exception_info:
+        DigimonCard(name='Biyomon',
+                    colors=colors,
+                    identifier='ST1-02',
+                    rarity=CardRarity.COMMON,
+                    form=DigimonForm.ROOKIE,
+                    attribute=
+                    DigimonAttribute.VACCINE,
+                    types=invalid_types,
+                    cost=2,
+                    power=3000, level=3)
+    assert str(exception_info.value) == 'types: all elements must be a member of DigimonType enum.'
+
+
+def test_09_instance_creation_and_accessing() -> None:
     card = DigimonCard(name='Biyomon', colors=colors, identifier='ST1-02',
                        rarity=CardRarity.COMMON, form=DigimonForm.ROOKIE, attribute=DigimonAttribute.VACCINE,
                        types=types, cost=2, power=3000, level=3)
@@ -102,13 +118,13 @@ def test_08_instance_creation_and_accessing() -> None:
     assert card.rarity == CardRarity.COMMON
     assert card.form == DigimonForm.ROOKIE
     assert card.attribute == DigimonAttribute.VACCINE
-    assert card.type == DigimonType.BIRD
+    assert card.types == types
     assert card.cost == 2
     assert card.power == 3000
     assert card.level == 3
 
 
-def test_09_instance_creation_without_level() -> None:
+def test_10_instance_creation_without_level() -> None:
     card_without_level = DigimonCard(name='Biyomon', colors=colors, identifier='ST1-02',
                                      rarity=CardRarity.COMMON, form=DigimonForm.ROOKIE,
                                      attribute=DigimonAttribute.VACCINE,
