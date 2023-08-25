@@ -6,6 +6,7 @@ from .assertions import assert_attr_raises_not_blank, assert_attr_raises_not_wit
     assert_attr_raises_not_positive, assert_frozenset_raises_not_minimum_length
 
 colors = frozenset([CardColor.RED])
+types = frozenset([DigimonType.BIRD])
 
 
 def test_01_name_must_not_be_blank() -> None:
@@ -14,7 +15,7 @@ def test_01_name_must_not_be_blank() -> None:
                                                                   identifier='ST1-02',
                                                                   rarity=CardRarity.COMMON, form=DigimonForm.ROOKIE,
                                                                   attribute=DigimonAttribute.VACCINE,
-                                                                  type=DigimonType.BIRD, cost=2, power=3000, level=3))
+                                                                  types=types, cost=2, power=3000, level=3))
 
 
 def test_02_identifier_must_not_be_blank() -> None:
@@ -24,7 +25,7 @@ def test_02_identifier_must_not_be_blank() -> None:
                                                                         rarity=CardRarity.COMMON,
                                                                         form=DigimonForm.ROOKIE,
                                                                         attribute=DigimonAttribute.VACCINE,
-                                                                        type=DigimonType.BIRD, cost=2, power=3000,
+                                                                        types=types, cost=2, power=3000,
                                                                         level=3))
 
 
@@ -35,7 +36,7 @@ def test_03_cost_must_be_between_zero_and_twenty() -> None:
                                                                          rarity=CardRarity.COMMON,
                                                                          form=DigimonForm.ROOKIE,
                                                                          attribute=DigimonAttribute.VACCINE,
-                                                                         type=DigimonType.BIRD,
+                                                                         types=types,
                                                                          cost=invalid_cost, power=3000,
                                                                          level=3))
 
@@ -46,7 +47,7 @@ def test_04_power_must_be_positive() -> None:
                                                                                rarity=CardRarity.COMMON,
                                                                                form=DigimonForm.ROOKIE,
                                                                                attribute=DigimonAttribute.VACCINE,
-                                                                               type=DigimonType.BIRD, cost=2,
+                                                                               types=types, cost=2,
                                                                                power=invalid_power, level=3))
 
 
@@ -57,7 +58,7 @@ def test_05_level_must_be_between_two_and_seven() -> None:
                                                                           rarity=CardRarity.COMMON,
                                                                           form=DigimonForm.ROOKIE,
                                                                           attribute=DigimonAttribute.VACCINE,
-                                                                          type=DigimonType.BIRD, cost=2,
+                                                                          types=types, cost=2,
                                                                           power=3000, level=invalid_level))
 
 
@@ -71,7 +72,7 @@ def test_06_colors_must_be_elements_of_card_color_enum() -> None:
                     form=DigimonForm.ROOKIE,
                     attribute=
                     DigimonAttribute.VACCINE,
-                    type=DigimonType.BIRD,
+                    types=types,
                     cost=2,
                     power=3000, level=3)
     assert str(exception_info.value) == 'colors: all elements must be a member of CardColor enum.'
@@ -86,7 +87,7 @@ def test_07_cannot_create_card_without_color() -> None:
                                                                                   form=DigimonForm.ROOKIE,
                                                                                   attribute=
                                                                                   DigimonAttribute.VACCINE,
-                                                                                  type=DigimonType.BIRD,
+                                                                                  types=types,
                                                                                   cost=2,
                                                                                   power=3000, level=3))
 
@@ -94,7 +95,7 @@ def test_07_cannot_create_card_without_color() -> None:
 def test_08_instance_creation_and_accessing() -> None:
     card = DigimonCard(name='Biyomon', colors=colors, identifier='ST1-02',
                        rarity=CardRarity.COMMON, form=DigimonForm.ROOKIE, attribute=DigimonAttribute.VACCINE,
-                       type=DigimonType.BIRD, cost=2, power=3000, level=3)
+                       types=types, cost=2, power=3000, level=3)
     assert card.name == 'Biyomon'
     assert card.colors == colors
     assert card.identifier == 'ST1-02'
@@ -111,5 +112,5 @@ def test_09_instance_creation_without_level() -> None:
     card_without_level = DigimonCard(name='Biyomon', colors=colors, identifier='ST1-02',
                                      rarity=CardRarity.COMMON, form=DigimonForm.ROOKIE,
                                      attribute=DigimonAttribute.VACCINE,
-                                     type=DigimonType.BIRD, cost=2, power=3000)
+                                     types=types, cost=2, power=3000)
     assert card_without_level.level is None
