@@ -108,7 +108,21 @@ def test_08_types_must_be_elements_of_digimon_type_enum() -> None:
     assert str(exception_info.value) == 'types: all elements must be a member of DigimonType enum.'
 
 
-def test_09_instance_creation_and_accessing() -> None:
+def test_09_cannot_create_card_without_types() -> None:
+    assert_frozenset_raises_not_minimum_length('types', 1,
+                                               lambda invalid_types: DigimonCard(name='Biyomon',
+                                                                                 colors=colors,
+                                                                                 identifier='ST1-02',
+                                                                                 rarity=CardRarity.COMMON,
+                                                                                 form=DigimonForm.ROOKIE,
+                                                                                 attribute=
+                                                                                 DigimonAttribute.VACCINE,
+                                                                                 types=invalid_types,
+                                                                                 cost=2,
+                                                                                 power=3000, level=3))
+
+
+def test_10_instance_creation_and_accessing() -> None:
     card = DigimonCard(name='Biyomon', colors=colors, identifier='ST1-02',
                        rarity=CardRarity.COMMON, form=DigimonForm.ROOKIE, attribute=DigimonAttribute.VACCINE,
                        types=types, cost=2, power=3000, level=3)
@@ -124,7 +138,7 @@ def test_09_instance_creation_and_accessing() -> None:
     assert card.level == 3
 
 
-def test_10_instance_creation_without_level() -> None:
+def test_11_instance_creation_without_level() -> None:
     card_without_level = DigimonCard(name='Biyomon', colors=colors, identifier='ST1-02',
                                      rarity=CardRarity.COMMON, form=DigimonForm.ROOKIE,
                                      attribute=DigimonAttribute.VACCINE,
