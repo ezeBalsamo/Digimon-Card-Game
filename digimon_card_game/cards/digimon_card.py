@@ -13,7 +13,7 @@ class DigimonCard:
     rarity: CardRarity = field(validator=in_(list(CardRarity)))
     form: DigimonForm = field(validator=in_(DigimonForm))
     attribute: DigimonAttribute = field(validator=in_(DigimonAttribute))
-    type: DigimonType = field(validator=in_(DigimonType))
+    types: frozenset[DigimonType] = field(validator=[min_len(1), all_elements_are_member_of_enum(DigimonType)])
     cost: int = field(validator=within_range(0, 20))
     power: int = field(validator=gt(0))
     level: Optional[int] = field(default=None, validator=optional(within_range(lower=2, upper=7)))
