@@ -2,7 +2,7 @@
 name = "digimon-card-game"
 version = "0.1.0"
 description = ""
-authors = ["ezeBalsamo <alexander.ezequiel.balsamo@gmail.com>"]
+authors = ["ezeBalsamo <alexander.ezequiel.balsamo@gmail.com>", "FedericoFuentesWeber <ffuentesweber@gmail.com>"]
 readme = "README.md"
 packages = [{include = "digimon_card_game"}, {include = "tests"}]
 
