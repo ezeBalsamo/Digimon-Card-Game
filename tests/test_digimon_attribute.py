@@ -3,4 +3,6 @@ from .assertions import assert_expected_enum_values
 
 
 def test_01_digimon_attributes() -> None:
-    assert_expected_enum_values(DigimonAttribute, {'Data', 'Free', 'Unknown', 'Vaccine', 'Variable', 'Virus'})
+    assert_expected_enum_values(
+        DigimonAttribute, {"Data", "Free", "Unknown", "Vaccine", "Variable", "Virus"}
+    )

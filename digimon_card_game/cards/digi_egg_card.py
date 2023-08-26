@@ -12,7 +12,9 @@ class DigiEggCard:
     identifier: str = field(validator=not_blank)
     rarity: CardRarity = field(validator=in_(list(CardRarity)))
     type: DigimonType = field(validator=in_(DigimonType))
-    level: Optional[int] = field(default=None, validator=optional(within_range(lower=2, upper=7)))
+    level: Optional[int] = field(
+        default=None, validator=optional(within_range(lower=2, upper=7))
+    )
 
     @property
     def form(self) -> DigimonForm:
