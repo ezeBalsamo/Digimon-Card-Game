@@ -29,3 +29,6 @@ repos:
       - id: poetry-check
         args: [--lock]
       - id: poetry-lock
+ci:
+  skip:
+    - poetry-lock
