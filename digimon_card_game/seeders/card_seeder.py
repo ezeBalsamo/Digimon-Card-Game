@@ -43,24 +43,24 @@ def grankuwagamon() -> DigimonCard:
 
 
 def greymon_x_antibody() -> DigimonCard:
-    return DigimonCard(name='Greymon - X Antibody', colors=frozenset([CardColor.BLACK, CardColor.RED]),
+    return DigimonCard(name='Greymon (X Antibody)', colors=frozenset([CardColor.BLACK, CardColor.RED]),
                        identifier='BT11-064', rarity=CardRarity.COMMON, form=DigimonForm.CHAMPION,
                        attribute=DigimonAttribute.VIRUS,
                        types=frozenset([DigimonType.DINOSAUR, DigimonType.X_ANTIBODY]), cost=5, power=6000, level=4)
 
 
 def calling_from_the_darkness() -> OptionCard:
-    return OptionCard(name='Calling from the darkness', colors=frozenset([CardColor.PURPLE]), identifier='BT7-107',
+    return OptionCard(name='Calling From The Darkness', colors=frozenset([CardColor.PURPLE]), identifier='BT7-107',
                       rarity=CardRarity.UNCOMMON, cost=1)
 
 
 def sunrise_buster() -> OptionCard:
-    return OptionCard(name='Sunrise buster', colors=frozenset([CardColor.YELLOW, CardColor.RED]), identifier='BT9-099',
+    return OptionCard(name='Sunrise Buster', colors=frozenset([CardColor.YELLOW, CardColor.RED]), identifier='BT9-099',
                       rarity=CardRarity.RARE, cost=5)
 
 
 def dorugreymon() -> DigimonCard:
-    return DigimonCard(name='DOruGreymon', colors=frozenset([CardColor.BLACK]), identifier='BT7-064',
+    return DigimonCard(name='DoruGreymon', colors=frozenset([CardColor.BLACK]), identifier='BT7-064',
                        rarity=CardRarity.UNCOMMON, form=DigimonForm.ULTIMATE, attribute=DigimonAttribute.DATA,
                        types=frozenset([DigimonType.DRAGON, DigimonType.X_ANTIBODY]), cost=8, power=7000, level=5)
 
@@ -88,7 +88,7 @@ def mega_digimon_fusion() -> OptionCard:
 
 
 def reinforcing_memory_boost() -> OptionCard:
-    return OptionCard(name='Reinforcing Memory Booster!', colors=frozenset([CardColor.YELLOW]), identifier='BT6-100',
+    return OptionCard(name='Reinforcing Memory Boost!', colors=frozenset([CardColor.YELLOW]), identifier='BT6-100',
                       rarity=CardRarity.COMMON, cost=6)
 
 
