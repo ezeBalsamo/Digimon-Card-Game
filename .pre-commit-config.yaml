@@ -23,3 +23,12 @@ repos:
         additional_dependencies:
           - attrs==23.1.0
           - pytest==7.4.0
+  - repo: https://github.com/python-poetry/poetry
+    rev: 1.6.0
+    hooks:
+      - id: poetry-check
+        args: [--lock]
+      - id: poetry-lock
+ci:
+  skip:
+    - poetry-lock
