@@ -1,5 +1,8 @@
-from typing import Callable, Any
+from typing import Any
+from typing import Callable
+
 from pytest import raises
+
 from ..number import assert_raises_not_positive_because
 
 

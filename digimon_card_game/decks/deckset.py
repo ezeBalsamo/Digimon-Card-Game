@@ -1,7 +1,11 @@
 from __future__ import annotations
-from attr import frozen, field, Attribute
-from ..extensions.attrs.validators import not_blank
+
+from attr import Attribute
+from attr import field
+from attr import frozen
+
 from . import Deck
+from ..extensions.attrs.validators import not_blank
 
 
 def validate_optional_decks(_instance: Deckset, attribute: Attribute[dict[str, Deck]],

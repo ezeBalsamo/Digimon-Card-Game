@@ -1,5 +1,5 @@
-from digimon_card_game.cards.information import DigimonType
 from .assertions import assert_expected_enum_values
+from digimon_card_game.cards.information import DigimonType
 
 
 def test_01_digimon_types() -> None:

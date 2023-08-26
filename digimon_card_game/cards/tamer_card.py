@@ -1,7 +1,13 @@
-from attr import frozen, field
-from attr.validators import in_, min_len
-from .information import CardColor, CardRarity
-from ..extensions.attrs.validators import not_blank, within_range, all_elements_are_member_of_enum
+from attr import field
+from attr import frozen
+from attr.validators import in_
+from attr.validators import min_len
+
+from ..extensions.attrs.validators import all_elements_are_member_of_enum
+from ..extensions.attrs.validators import not_blank
+from ..extensions.attrs.validators import within_range
+from .information import CardColor
+from .information import CardRarity
 
 
 @frozen(kw_only=True)

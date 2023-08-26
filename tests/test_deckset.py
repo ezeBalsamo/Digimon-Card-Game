@@ -1,7 +1,9 @@
 from pytest import raises
-from digimon_card_game.seeders import card_seeder
-from digimon_card_game.decks import Deck, Deckset
+
 from .assertions import assert_attr_raises_not_blank
+from digimon_card_game.decks import Deck
+from digimon_card_game.decks import Deckset
+from digimon_card_game.seeders import card_seeder
 
 shadow_wing = card_seeder.shadow_wing()
 koromon = card_seeder.koromon()

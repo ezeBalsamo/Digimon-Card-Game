@@ -1,10 +1,13 @@
 from datetime import date
+
+from pytest import raises
+
+from .assertions import assert_dict_raises_not_minimum_length
 from digimon_card_game.banlists import Banlist
 from digimon_card_game.cards import Card
+from digimon_card_game.decks import Deck
+from digimon_card_game.decks import Deckset
 from digimon_card_game.seeders import card_seeder
-from digimon_card_game.decks import Deckset, Deck
-from .assertions import assert_dict_raises_not_minimum_length
-from pytest import raises
 
 shadow_wing: Card = card_seeder.shadow_wing()
 biyomon: Card = card_seeder.biyomon()
