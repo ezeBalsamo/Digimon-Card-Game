@@ -1,6 +1,13 @@
 # Digimon Card Game Documentation
 
-Do you want to live the experience of playing Digimon Card Game from your pc and/or mobile, without spending money to buy the cards? This app makes that dream come true!
+Do you want to live the experience of playing Digimon Card Game
+from your pc and/or mobile, without spending money to
+buy the cards? This app makes that dream come true!
+
+## Prerequisites
+
+We use [Poetry](https://python-poetry.org/docs/).
+Please follow the installation guide.
 
 ## Installation
 

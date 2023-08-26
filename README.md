@@ -12,7 +12,9 @@ A fan-made Digimon Card Game
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/ezeBalsamo/Digimon-Card-Game?include_prereleases)
 ![License](https://img.shields.io/github/license/ezeBalsamo/Digimon-Card-Game)
 
-Do you want to live the experience of playing Digimon Card Game from your pc and/or mobile, without spending money to buy the cards? This app makes that dream come true!
+Do you want to live the experience of playing Digimon Card Game
+from your pc and/or mobile, without spending money to
+buy the cards? This app makes that dream come true!
 
 ## Quick links
 
