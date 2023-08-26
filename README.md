@@ -7,7 +7,6 @@ A fan-made Digimon Card Game
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
 ![Unit Tests](https://github.com/ezeBalsamo/Digimon-Card-Game/actions/workflows/tests.yml/badge.svg)
 ![Codecov](https://img.shields.io/codecov/c/github/ezeBalsamo/Digimon-Card-Game?logo=codecov)
-[![pre-commit](https://img.shields.io/badge/pre--commit-enabled-brightgreen?logo=pre-commit)](https://github.com/pre-commit/pre-commit)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/ezeBalsamo/Digimon-Card-Game/release-candidate.svg)](https://results.pre-commit.ci/latest/github/ezeBalsamo/Digimon-Card-Game/release-candidate)
 ![GitHub release (latest by date including pre-releases)](https://img.shields.io/github/v/release/ezeBalsamo/Digimon-Card-Game?include_prereleases)
 ![License](https://img.shields.io/github/license/ezeBalsamo/Digimon-Card-Game)
