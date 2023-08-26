@@ -7,3 +7,4 @@ class DigimonForm(StrEnum):
     CHAMPION = 'Champion'
     MEGA = 'Mega'
     ULTIMATE = 'Ultimate'
+    HYBRID = 'Hybrid'
