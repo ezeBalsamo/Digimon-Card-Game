@@ -92,7 +92,7 @@ def test_10_deckset_is_not_allowed_if_main_deck_is_not_allowed() -> None:
     number_of_copies_by_card = {biyomon: 0}
     banlist = Banlist(date=date.today(), number_of_copies_by_card=number_of_copies_by_card)
     deck = Deck(cards=[biyomon])
-    deckset = Deckset(name="Deckset", main_deck=deck)
+    deckset = Deckset(name='Deckset', main_deck=deck)
 
     assert not banlist.is_deckset_allowed(deckset)
 
@@ -106,7 +106,7 @@ def test_11_deckset_is_not_allowed_if_at_least_one_the_optional_decks_is_not_all
     main_deck = Deck(cards=[shadow_wing])
     biyomon_deck = Deck(cards=[biyomon])
     optional_decks = {'Biyomon-Deck': biyomon_deck}
-    deckset = Deckset(name="Deckset", main_deck=main_deck, optional_decks=optional_decks)
+    deckset = Deckset(name='Deckset', main_deck=main_deck, optional_decks=optional_decks)
 
     assert not banlist.is_deckset_allowed(deckset)
 
@@ -120,6 +120,6 @@ def test_12_deckset_is_allowed_if_all_decks_are_allowed() -> None:
     main_deck = Deck(cards=[shadow_wing])
     digi_egg_deck = Deck(cards=[card_seeder.koromon()])
     optional_decks = {'Digi-Egg': digi_egg_deck}
-    deckset = Deckset(name="Deckset", main_deck=main_deck, optional_decks=optional_decks)
+    deckset = Deckset(name='Deckset', main_deck=main_deck, optional_decks=optional_decks)
 
     assert banlist.is_deckset_allowed(deckset)

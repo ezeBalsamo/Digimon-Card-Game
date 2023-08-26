@@ -7,8 +7,8 @@ from . import Deck
 def validate_optional_decks(_instance: Deckset, attribute: Attribute[dict[str, Deck]],
                             optional_decks: dict[str, Deck]) -> None:
     lowercase_identifiers = [identifier.lower() for identifier in optional_decks]
-    equivalent_identifiers = set(
-        identifier for identifier in lowercase_identifiers if lowercase_identifiers.count(identifier) > 1)
+    equivalent_identifiers = {
+        identifier for identifier in lowercase_identifiers if lowercase_identifiers.count(identifier) > 1}
 
     if equivalent_identifiers:
         raise ValueError(

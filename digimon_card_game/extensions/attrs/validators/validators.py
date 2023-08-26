@@ -1,11 +1,11 @@
 from __future__ import annotations
 from enum import Enum
-from typing import Any, Callable, Type
+from typing import Any, Callable
 from attrs import Attribute
 
 
 def not_blank(_instance: Any, attribute: Attribute[str], value: str) -> None:
-    if value.strip() == "":
+    if value.strip() == '':
         raise ValueError(f'{attribute.name} must not be blank.')
 
 
@@ -17,7 +17,7 @@ def within_range(lower: int, upper: int) -> Callable[[Any, Attribute[int], int],
     return wrapper
 
 
-def all_elements_are_member_of_enum(enum: Type[Enum]) -> Callable[[Any, Attribute[Any], Any], None]:
+def all_elements_are_member_of_enum(enum: type[Enum]) -> Callable[[Any, Attribute[Any], Any], None]:
     def wrapper(_instance: Any, attribute: Attribute[Any], value: Any) -> None:
         for element in value:
             if element not in enum:
