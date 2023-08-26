@@ -1,8 +1,14 @@
-from typing import Optional
-from attr import frozen, field
-from attr.validators import in_, optional
-from .information import CardColor, CardRarity, DigimonForm, DigimonType
-from ..extensions.attrs.validators import not_blank, within_range
+from attr import field
+from attr import frozen
+from attr.validators import in_
+from attr.validators import optional
+
+from ..extensions.attrs.validators import not_blank
+from ..extensions.attrs.validators import within_range
+from .information import CardColor
+from .information import CardRarity
+from .information import DigimonForm
+from .information import DigimonType
 
 
 @frozen(kw_only=True)
@@ -12,7 +18,9 @@ class DigiEggCard:
     identifier: str = field(validator=not_blank)
     rarity: CardRarity = field(validator=in_(list(CardRarity)))
     type: DigimonType = field(validator=in_(DigimonType))
-    level: Optional[int] = field(default=None, validator=optional(within_range(lower=2, upper=7)))
+    level: int | None = field(
+        default=None, validator=optional(within_range(lower=2, upper=7))
+    )
 
     @property
     def form(self) -> DigimonForm:

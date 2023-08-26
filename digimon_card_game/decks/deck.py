@@ -1,8 +1,9 @@
-from attr import frozen, field
+from attr import field
+from attr import frozen
+from attr.validators import min_len
 
 from ..assertions import assert_is_positive
 from ..cards import Card
-from attr.validators import min_len
 
 
 @frozen(kw_only=True)
@@ -21,15 +22,18 @@ class Deck:
 
     def assert_can_draw_many(self, number_of_cards: int) -> None:
         self.assert_is_not_empty()
-        assert_is_positive(number_of_cards, 'The number of cards to draw must be positive.')
+        assert_is_positive(
+            number_of_cards, "The number of cards to draw must be positive."
+        )
         number_of_remaining_cards = len(self.cards)
         if number_of_remaining_cards < number_of_cards:
             raise ValueError(
-                f'You cannot draw {number_of_cards} cards. Number of remaining cards: {number_of_remaining_cards}.')
+                f"You cannot draw {number_of_cards} cards. Number of remaining cards: {number_of_remaining_cards}."
+            )
 
     def assert_is_not_empty(self) -> None:
         if self.is_empty():
-            raise ValueError('There are no more cards.')
+            raise ValueError("There are no more cards.")
 
     def is_empty(self) -> bool:
         return not self.cards

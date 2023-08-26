@@ -1,4 +1,6 @@
-from attr import frozen, field
+from attr import field
+from attr import frozen
+
 from ..decks import Deckset
 from ..extensions.attrs.validators import not_blank
 
