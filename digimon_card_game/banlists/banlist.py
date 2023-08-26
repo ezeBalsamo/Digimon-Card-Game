@@ -10,7 +10,7 @@ from ..decks import Deckset, Deck
 def validate_non_negative_number_of_copies(_instance: Any, attribute: Attribute[dict[Card, int]],
                                            number_of_copies_by_card: dict[Card, int]) -> None:
     if any(value < 0 for value in number_of_copies_by_card.values()):
-        raise ValueError(f"{attribute.name} must not include negative values.")
+        raise ValueError(f'{attribute.name} must not include negative values.')
 
 
 @frozen(kw_only=True)
