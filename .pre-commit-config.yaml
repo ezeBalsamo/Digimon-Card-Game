@@ -6,7 +6,6 @@ repos:
       - id: check-case-conflict
       - id: check-toml
       - id: check-yaml
-      - id: end-of-file-fixer
       - id: name-tests-test
         args: [--pytest-test-first]
         exclude: assertions/
