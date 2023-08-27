@@ -13,7 +13,9 @@ from .information import CardRarity
 @frozen(kw_only=True)
 class OptionCard:
     name: str = field(validator=not_blank)
-    colors: frozenset[CardColor] = field(validator=[min_len(1), all_elements_are_member_of_enum(CardColor)])
+    colors: frozenset[CardColor] = field(
+        validator=[min_len(1), all_elements_are_member_of_enum(CardColor)]
+    )
     identifier: str = field(validator=not_blank)
     rarity: CardRarity = field(validator=in_(list(CardRarity)))
     cost: int = field(validator=within_range(0, 20))
