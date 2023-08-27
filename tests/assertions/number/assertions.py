@@ -8,8 +8,9 @@ def assert_raises_not_positive(closure: Callable[[int], Any], explanation: str) 
     assert_raises_not_positive_because(closure, lambda _: explanation)
 
 
-def assert_raises_not_positive_because(closure: Callable[[int], Any],
-                                       explanation_closure: Callable[[int], str]) -> None:
+def assert_raises_not_positive_because(
+    closure: Callable[[int], Any], explanation_closure: Callable[[int], str]
+) -> None:
     for invalid_value in [-1, 0]:
         with raises(ValueError) as exception_info:
             closure(invalid_value)

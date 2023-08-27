@@ -17,11 +17,13 @@ koromon = card_seeder.koromon()
 def assert_raises_no_more_cards(closure: Callable[[], Any]) -> None:
     with raises(ValueError) as exception_info:
         closure()
-    assert str(exception_info.value) == 'There are no more cards.'
+    assert str(exception_info.value) == "There are no more cards."
 
 
 def test_01_cannot_create_deck_without_cards() -> None:
-    assert_list_raises_not_minimum_length('cards', 1, lambda invalid_cards: Deck(cards=invalid_cards))
+    assert_list_raises_not_minimum_length(
+        "cards", 1, lambda invalid_cards: Deck(cards=invalid_cards)
+    )
 
 
 def test_02_instance_creation_and_accessing() -> None:
@@ -77,10 +79,15 @@ def test_08_cannot_draw_more_cards_than_the_number_of_remaining_cards_in_deck() 
     deck = Deck(cards=[koromon])
     with raises(ValueError) as exception_info:
         deck.draw_many(number_of_cards=2)
-    assert str(exception_info.value) == 'You cannot draw 2 cards. Number of remaining cards: 1.'
+    assert (
+        str(exception_info.value)
+        == "You cannot draw 2 cards. Number of remaining cards: 1."
+    )
 
 
 def test_09_cannot_draw_non_positive_number_of_cards() -> None:
     deck = Deck(cards=[koromon])
-    assert_raises_not_positive(lambda invalid_number_of_cards: deck.draw_many(invalid_number_of_cards),
-                               'The number of cards to draw must be positive.')
+    assert_raises_not_positive(
+        lambda invalid_number_of_cards: deck.draw_many(invalid_number_of_cards),
+        "The number of cards to draw must be positive.",
+    )
