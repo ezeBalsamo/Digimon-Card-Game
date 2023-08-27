@@ -1,8 +1,9 @@
-from attr import frozen, field
+from attr import field
+from attr import frozen
+from attr.validators import min_len
 
 from ..assertions import assert_is_positive
 from ..cards import Card
-from attr.validators import min_len
 
 
 @frozen(kw_only=True)

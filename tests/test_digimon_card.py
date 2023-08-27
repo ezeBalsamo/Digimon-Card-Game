@@ -1,9 +1,17 @@
-from pytest import raises
 from typing import Any
-from digimon_card_game.cards.information import CardColor, CardRarity, DigimonForm, DigimonAttribute, DigimonType
+
+from pytest import raises
+
+from .assertions import assert_attr_raises_not_blank
+from .assertions import assert_attr_raises_not_positive
+from .assertions import assert_attr_raises_not_within_range
+from .assertions import assert_frozenset_raises_not_minimum_length
 from digimon_card_game.cards import DigimonCard
-from .assertions import assert_attr_raises_not_blank, assert_attr_raises_not_within_range, \
-    assert_attr_raises_not_positive, assert_frozenset_raises_not_minimum_length
+from digimon_card_game.cards.information import CardColor
+from digimon_card_game.cards.information import CardRarity
+from digimon_card_game.cards.information import DigimonAttribute
+from digimon_card_game.cards.information import DigimonForm
+from digimon_card_game.cards.information import DigimonType
 
 colors = frozenset([CardColor.RED])
 types = frozenset([DigimonType.BIRD])

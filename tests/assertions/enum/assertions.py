@@ -1,5 +1,7 @@
 from enum import Enum
-from typing import Type, Set, Any
+from typing import Any
+from typing import Set
+from typing import Type
 
 
 def assert_expected_enum_values(enum_class: Type[Enum], expected_enum_values: Set[Any]) -> None:

@@ -1,7 +1,8 @@
-from digimon_card_game.seeders import card_seeder
-from digimon_card_game.decks import Deck, Deckset
-from digimon_card_game.duels import Duelist
 from .assertions import assert_attr_raises_not_blank
+from digimon_card_game.decks import Deck
+from digimon_card_game.decks import Deckset
+from digimon_card_game.duels import Duelist
+from digimon_card_game.seeders import card_seeder
 
 
 def deckset() -> Deckset:

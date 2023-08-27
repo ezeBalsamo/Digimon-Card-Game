@@ -1,5 +1,8 @@
-from attr import frozen, field
 from enum import Enum
+
+from attr import field
+from attr import frozen
+
 from ...extensions.attrs.validators import not_blank
 
 

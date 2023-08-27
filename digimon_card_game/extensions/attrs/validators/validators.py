@@ -1,6 +1,9 @@
 from __future__ import annotations
+
 from enum import Enum
-from typing import Any, Callable
+from typing import Any
+from typing import Callable
+
 from attrs import Attribute
 
 

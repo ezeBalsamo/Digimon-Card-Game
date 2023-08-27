@@ -1,7 +1,10 @@
-from digimon_card_game.cards.information import CardColor, CardRarity, DigimonType, DigimonForm
+from .assertions import assert_attr_raises_not_blank
+from .assertions import assert_attr_raises_not_within_range
 from digimon_card_game.cards import DigiEggCard
-from .assertions import assert_attr_raises_not_blank, \
-    assert_attr_raises_not_within_range
+from digimon_card_game.cards.information import CardColor
+from digimon_card_game.cards.information import CardRarity
+from digimon_card_game.cards.information import DigimonForm
+from digimon_card_game.cards.information import DigimonType
 
 
 def test_01_name_must_not_be_blank() -> None:
