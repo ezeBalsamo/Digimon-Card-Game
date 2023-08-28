@@ -1,17 +1,18 @@
 from typing import Any
 
-from pytest import raises
+import pytest
 
-from .assertions import assert_attr_raises_not_blank
-from .assertions import assert_attr_raises_not_positive
-from .assertions import assert_attr_raises_not_within_range
-from .assertions import assert_frozenset_raises_not_minimum_length
 from digimon_card_game.cards import DigimonCard
 from digimon_card_game.cards.information import CardColor
 from digimon_card_game.cards.information import CardRarity
 from digimon_card_game.cards.information import DigimonAttribute
 from digimon_card_game.cards.information import DigimonForm
 from digimon_card_game.cards.information import DigimonType
+
+from .assertions import assert_attr_raises_not_blank
+from .assertions import assert_attr_raises_not_positive
+from .assertions import assert_attr_raises_not_within_range
+from .assertions import assert_frozenset_raises_not_minimum_length
 
 colors = frozenset([CardColor.RED])
 types = frozenset([DigimonType.BIRD])
@@ -113,7 +114,9 @@ def test_05_level_must_be_between_two_and_seven() -> None:
 
 def test_06_colors_must_be_elements_of_card_color_enum() -> None:
     invalid_colors: frozenset[Any] = frozenset([CardRarity.COMMON])
-    with raises(ValueError) as exception_info:
+    with pytest.raises(
+        ValueError, match="colors: all elements must be a member of CardColor enum."
+    ):
         DigimonCard(
             name="Biyomon",
             colors=invalid_colors,
@@ -126,10 +129,6 @@ def test_06_colors_must_be_elements_of_card_color_enum() -> None:
             power=3000,
             level=3,
         )
-    assert (
-        str(exception_info.value)
-        == "colors: all elements must be a member of CardColor enum."
-    )
 
 
 def test_07_cannot_create_card_without_color() -> None:
@@ -153,7 +152,9 @@ def test_07_cannot_create_card_without_color() -> None:
 
 def test_08_types_must_be_elements_of_digimon_type_enum() -> None:
     invalid_types: frozenset[Any] = frozenset([CardRarity.COMMON])
-    with raises(ValueError) as exception_info:
+    with pytest.raises(
+        ValueError, match="types: all elements must be a member of DigimonType enum."
+    ):
         DigimonCard(
             name="Biyomon",
             colors=colors,
@@ -166,10 +167,6 @@ def test_08_types_must_be_elements_of_digimon_type_enum() -> None:
             power=3000,
             level=3,
         )
-    assert (
-        str(exception_info.value)
-        == "types: all elements must be a member of DigimonType enum."
-    )
 
 
 def test_09_cannot_create_card_without_types() -> None:
