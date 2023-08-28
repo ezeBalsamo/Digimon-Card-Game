@@ -1,13 +1,14 @@
 from typing import Any
 
-from pytest import raises
+import pytest
+
+from digimon_card_game.cards import OptionCard
+from digimon_card_game.cards.information import CardColor
+from digimon_card_game.cards.information import CardRarity
 
 from .assertions import assert_attr_raises_not_blank
 from .assertions import assert_attr_raises_not_within_range
 from .assertions import assert_frozenset_raises_not_minimum_length
-from digimon_card_game.cards import OptionCard
-from digimon_card_game.cards.information import CardColor
-from digimon_card_game.cards.information import CardRarity
 
 colors = frozenset([CardColor.RED])
 
@@ -55,7 +56,9 @@ def test_03_cost_must_be_between_zero_and_twenty() -> None:
 
 def test_04_colors_must_be_elements_of_card_color_enum() -> None:
     invalid_colors: frozenset[Any] = frozenset([CardRarity.COMMON])
-    with raises(ValueError) as exception_info:
+    with pytest.raises(
+        ValueError, match="colors: all elements must be a member of CardColor enum."
+    ):
         OptionCard(
             name="Shadow Wing",
             colors=invalid_colors,
@@ -63,10 +66,6 @@ def test_04_colors_must_be_elements_of_card_color_enum() -> None:
             rarity=CardRarity.COMMON,
             cost=1,
         )
-    assert (
-        str(exception_info.value)
-        == "colors: all elements must be a member of CardColor enum."
-    )
 
 
 def test_5_cannot_create_card_without_color() -> None:

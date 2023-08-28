@@ -1,9 +1,12 @@
-from pytest import raises
+from re import escape
 
-from .assertions import assert_attr_raises_not_blank
+import pytest
+
 from digimon_card_game.decks import Deck
 from digimon_card_game.decks import Deckset
 from digimon_card_game.seeders import card_seeder
+
+from .assertions import assert_attr_raises_not_blank
 
 shadow_wing = card_seeder.shadow_wing()
 koromon = card_seeder.koromon()
@@ -17,16 +20,17 @@ def test_01_cannot_create_deckset_with_optional_decks_with_equivalent_identifier
         "Digi-Egg": Deck(cards=[koromon]),
         "Digi-EGG": Deck(cards=[koromon]),
     }
-    with raises(ValueError) as exception_info:
+    with pytest.raises(
+        ValueError,
+        match=escape(
+            "optional_decks must not include equivalent identifiers (lowercase): digi-egg"
+        ),
+    ):
         Deckset(
             name="Starter Deck",
             main_deck=main_deck,
             optional_decks=invalid_optional_decks,
         )
-    assert (
-        str(exception_info.value)
-        == "optional_decks must not include equivalent identifiers (lowercase): digi-egg"
-    )
 
 
 def test_02_name_must_not_be_blank() -> None:
@@ -71,6 +75,7 @@ def test_05_should_fail_when_trying_to_get_optional_deck_with_invalid_identifier
         main_deck=Deck(cards=[shadow_wing]),
         optional_decks=optional_decks,
     )
-    with raises(ValueError) as exception_info:
+    with pytest.raises(
+        ValueError, match="There is no optional deck identified by side."
+    ):
         deckset.optional_deck_known_as("side")
-    assert str(exception_info.value) == "There is no optional deck identified by side."

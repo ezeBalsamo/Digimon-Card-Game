@@ -1,7 +1,6 @@
 from __future__ import annotations
 
-from datetime import date
-from typing import Any
+from datetime import date as Date
 
 from attr import Attribute
 from attr import field
@@ -14,7 +13,7 @@ from ..decks import Deckset
 
 
 def validate_non_negative_number_of_copies(
-    _instance: Any,
+    _instance: Banlist,
     attribute: Attribute[dict[Card, int]],
     number_of_copies_by_card: dict[Card, int],
 ) -> None:
@@ -24,7 +23,7 @@ def validate_non_negative_number_of_copies(
 
 @frozen(kw_only=True)
 class Banlist:
-    date: date
+    date: Date
     number_of_copies_by_card: dict[Card, int] = field(
         validator=[min_len(1), validate_non_negative_number_of_copies]
     )

@@ -1,7 +1,7 @@
+from collections.abc import Callable
 from typing import Any
-from typing import Callable
 
-from pytest import raises
+import pytest
 
 
 def assert_raises_not_positive(closure: Callable[[int], Any], explanation: str) -> None:
@@ -12,6 +12,5 @@ def assert_raises_not_positive_because(
     closure: Callable[[int], Any], explanation_closure: Callable[[int], str]
 ) -> None:
     for invalid_value in [-1, 0]:
-        with raises(ValueError) as exception_info:
+        with pytest.raises(ValueError, match=explanation_closure(invalid_value)):
             closure(invalid_value)
-        assert str(exception_info.value) == explanation_closure(invalid_value)

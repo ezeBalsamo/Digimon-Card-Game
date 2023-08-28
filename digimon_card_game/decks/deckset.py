@@ -4,8 +4,8 @@ from attr import Attribute
 from attr import field
 from attr import frozen
 
-from . import Deck
 from ..extensions.attrs.validators import not_blank
+from . import Deck
 
 
 def validate_optional_decks(
@@ -37,8 +37,10 @@ class Deckset:
     def optional_deck_known_as(self, identifier: str) -> Deck:
         try:
             return self.optional_decks[identifier]
-        except KeyError:
-            raise ValueError(f"There is no optional deck identified by {identifier}.")
+        except KeyError as error_info:
+            raise ValueError(
+                f"There is no optional deck identified by {identifier}."
+            ) from error_info
 
     def all_decks(self) -> list[Deck]:
-        return [self.main_deck] + list(self.optional_decks.values())
+        return [self.main_deck, *list(self.optional_decks.values())]

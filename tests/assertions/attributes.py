@@ -1,28 +1,25 @@
+from collections.abc import Callable
 from typing import Any
-from typing import Callable
 
-from pytest import raises
+import pytest
 
-from ..number import assert_raises_not_positive_because
+from .number import assert_raises_not_positive_because
 
 
 def assert_attr_raises_not_blank(attr_name: str, closure: Callable[[str], Any]) -> None:
     for invalid_value in ["", " "]:
-        with raises(ValueError) as exception_info:
+        with pytest.raises(ValueError, match=f"{attr_name} must not be blank."):
             closure(invalid_value)
-        assert str(exception_info.value) == f"{attr_name} must not be blank."
 
 
 def assert_attr_raises_not_within_range(
     attr_name: str, lower: int, upper: int, closure: Callable[[int], Any]
 ) -> None:
     for invalid_value in [lower - 1, upper + 1]:
-        with raises(ValueError) as exception_info:
+        with pytest.raises(
+            ValueError, match=f"{attr_name} must be between {lower} and {upper}."
+        ):
             closure(invalid_value)
-        assert (
-            str(exception_info.value)
-            == f"{attr_name} must be between {lower} and {upper}."
-        )
 
 
 def assert_attr_raises_not_positive(

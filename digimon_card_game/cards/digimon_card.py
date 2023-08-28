@@ -1,5 +1,3 @@
-from typing import Optional
-
 from attr import field
 from attr import frozen
 from attr.validators import gt
@@ -32,6 +30,6 @@ class DigimonCard:
     )
     cost: int = field(validator=within_range(0, 20))
     power: int = field(validator=gt(0))
-    level: Optional[int] = field(
+    level: int | None = field(
         default=None, validator=optional(within_range(lower=2, upper=7))
     )
