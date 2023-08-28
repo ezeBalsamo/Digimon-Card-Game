@@ -33,6 +33,7 @@ ignore = [
     "ANN101",   # missing-type-self
     "TID252",   # relative-imports
     "TRY003",   # raise-vanilla-args (we do not need to create additional exceptions)
+    "TCH",      # flake8-type-checking
 ]
 force-exclude = true # to respect exclusions (useful for pre-commit)
 

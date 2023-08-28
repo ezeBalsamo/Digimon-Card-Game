@@ -1,17 +1,14 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from collections.abc import Callable
+from collections.abc import Iterable
+from enum import Enum
+from typing import Any
+from typing import TypeVar
 
-if TYPE_CHECKING:
-    from typing import Any
-    from typing import TypeVar
+from attrs import Attribute
 
-    T = TypeVar("T")
-    from collections.abc import Callable
-    from collections.abc import Iterable
-    from enum import Enum
-
-    from attrs import Attribute
+T = TypeVar("T")
 
 
 def not_blank(_instance: object, attribute: Attribute[str], value: str) -> None:

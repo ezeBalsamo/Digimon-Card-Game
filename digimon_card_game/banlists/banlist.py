@@ -1,19 +1,15 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
+from datetime import date as Date
 
-if TYPE_CHECKING:
-    from datetime import date as Date
-
-    from attr import Attribute
-
-    from ..cards import Card
-    from ..decks import Deck
-    from ..decks import Deckset
-
+from attr import Attribute
 from attr import field
 from attr import frozen
 from attrs.validators import min_len
+
+from ..cards import Card
+from ..decks import Deck
+from ..decks import Deckset
 
 
 def validate_non_negative_number_of_copies(

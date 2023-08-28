@@ -1,16 +1,11 @@
 from __future__ import annotations
 
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from attr import Attribute
-
-    from . import Deck
-
+from attr import Attribute
 from attr import field
 from attr import frozen
 
 from ..extensions.attrs.validators import not_blank
+from . import Deck
 
 
 def validate_optional_decks(

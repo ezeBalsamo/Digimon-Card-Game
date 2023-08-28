@@ -1,13 +1,9 @@
-from typing import TYPE_CHECKING
-
-if TYPE_CHECKING:
-    from digimon_card_game.cards import Card
-
 from collections.abc import Callable
 from typing import Any
 
 import pytest
 
+from digimon_card_game.cards import Card
 from digimon_card_game.decks import Deck
 from digimon_card_game.seeders import card_seeder
 
