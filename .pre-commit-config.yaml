@@ -46,6 +46,12 @@ repos:
       - id: python-safety-dependencies-check
         files: pyproject.toml
         args: [ --groups=dev ]
+  - repo: https://github.com/rubik/xenon
+    rev: v0.9.1
+    hooks:
+      - id: xenon
+        args: [ --max-average=A, --max-modules=A, --max-absolute=A ]
+        exclude: tests
 ci:
   skip:
     - poetry-lock
