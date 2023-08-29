@@ -40,6 +40,12 @@ repos:
     rev: v0.35.0
     hooks:
       - id: markdownlint
+  - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
+    rev: v1.3.2
+    hooks:
+      - id: python-safety-dependencies-check
+        files: pyproject.toml
+        args: [ --groups=dev ]
   - repo: https://github.com/rubik/xenon
     rev: v0.9.1
     hooks:
@@ -49,3 +55,4 @@ repos:
 ci:
   skip:
     - poetry-lock
+    - python-safety-dependencies-check
