@@ -1,18 +1,18 @@
-name: Tests
+name: Tests and Code Quality
 
 on: [push,pull_request,workflow_dispatch]
 
 jobs:
-  test:
+  poetry:
     strategy:
       matrix:
-        os: [ "ubuntu-latest", "macos-latest" ]
-        python-version: [ "3.11" ]
+        os: [ ubuntu-latest, macos-latest ]
+        python-version: [ 3.11 ]
     runs-on: ${{ matrix.os }}
-    name: Python ${{ matrix.python-version }} - ${{ matrix.os }}
+    name: Poetry - Tests - Mypy - ${{ matrix.python-version }} - ${{ matrix.os }}
     steps:
       #----------------------------------------------
-      #       check-out repo and set-up python
+      #       Check-out repo and setup Python
       #----------------------------------------------
       - name: Check out repository
         uses: actions/checkout@v3
@@ -22,7 +22,7 @@ jobs:
         with:
           python-version: ${{ matrix.python-version }}
       #----------------------------------------------
-      #  -----  install & configure poetry  -----
+      #          Install & configure poetry
       #----------------------------------------------
       - name: Install Poetry
         uses: snok/install-poetry@v1
@@ -30,7 +30,7 @@ jobs:
           virtualenvs-create: true
           virtualenvs-in-project: true
       #----------------------------------------------
-      #       load cached venv if cache exists
+      #       Load cached venv if cache exists
       #----------------------------------------------
       - name: Load cached venv
         id: cached-poetry-dependencies
@@ -39,18 +39,27 @@ jobs:
           path: .venv
           key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
       #----------------------------------------------
-      # install dependencies if cache does not exist
+      # Install dependencies if cache does not exist
       #----------------------------------------------
       - name: Install project
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction
+      #----------------------------------------------
+      #        Check code statically with Mypy
+      #----------------------------------------------
+      - name: Check code statically with Mypy
+        uses: tsuyoshicho/action-mypy@v3.12.0
+        with:
+          reporter: github-pr-review
+          level: warning
+          execute_command: 'poetry run mypy --strict digimon_card_game tests'
       #----------------------------------------------
       #    run test suite and output coverage file
       #----------------------------------------------
       - name: Test with pytest
         run: poetry run pytest --cov --cov-report=xml
       #----------------------------------------------
-      #             upload coverage stats
+      #             Upload coverage stats
       # (requires CODECOV_TOKEN in repository secrets)
       #----------------------------------------------
       - name: Upload coverage reports to Codecov
@@ -59,3 +68,64 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
           file: ./coverage.xml
+  ruff:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+    name: Ruff - ${{ matrix.os }}
+    steps:
+      #----------------------------------------------
+      #                Check-out repo
+      #----------------------------------------------
+      - name: Check out repository
+        uses: actions/checkout@v3
+      #----------------------------------------------
+      #              Lint code with Ruff
+      #----------------------------------------------
+      - name: Lint code with Ruff
+        uses: chartboost/ruff-action@v1
+        with:
+          args: check . --fix --config pyproject.toml
+          version: 0.0.286
+      #----------------------------------------------
+      #                 Auto Commit
+      #----------------------------------------------
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.16.0
+        with:
+          commit_message: ':rotating_light: Lint issues fixed by Ruff CI'
+  black:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+    name: Black - ${{ matrix.os }}
+    steps:
+      #----------------------------------------------
+      #                Check-out repo
+      #----------------------------------------------
+      - name: Check out repository
+        uses: actions/checkout@v3
+      #----------------------------------------------
+      #         Enforce code style with Black
+      #----------------------------------------------
+      - name: Enforce code style with Black
+        uses: psf/black@stable
+  radon:
+    runs-on: ubuntu-latest
+    name: Radon - ubuntu-latest
+    steps:
+      #----------------------------------------------
+      #                Check-out repo
+      #----------------------------------------------
+      - name: Check out repository
+        uses: actions/checkout@v3
+      #----------------------------------------------
+      #     Analyze code complexity  with Radon
+      #----------------------------------------------
+      - name: Analyze code complexity with Radon
+        uses: davidslusser/actions_python_radon@v1.0.0
+        with:
+          src: .
+          grade: A
