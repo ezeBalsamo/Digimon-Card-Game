@@ -5,6 +5,11 @@
 A fan-made Digimon Card Game
 
 [![Poetry](https://img.shields.io/endpoint?url=https://python-poetry.org/badge/v0.json)](https://python-poetry.org/)
+[![Ruff](https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json)](https://github.com/astral-sh/ruff)
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+[![Imports: isort](https://img.shields.io/badge/%20imports-isort-%231674b1?style=flat&labelColor=ef8336)](https://pycqa.github.io/isort/)
+[![Checked with mypy](https://www.mypy-lang.org/static/mypy_badge.svg)](https://mypy-lang.org/)
+[![CodeFactor](https://www.codefactor.io/repository/github/ezebalsamo/digimon-card-game/badge)](https://www.codefactor.io/repository/github/ezebalsamo/digimon-card-game)
 ![Unit Tests](https://github.com/ezeBalsamo/Digimon-Card-Game/actions/workflows/tests.yml/badge.svg)
 ![Codecov](https://img.shields.io/codecov/c/github/ezeBalsamo/Digimon-Card-Game?logo=codecov)
 [![pre-commit.ci status](https://results.pre-commit.ci/badge/github/ezeBalsamo/Digimon-Card-Game/release-candidate.svg)](https://results.pre-commit.ci/latest/github/ezeBalsamo/Digimon-Card-Game/release-candidate)
