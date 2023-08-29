@@ -1,61 +1,85 @@
-name: Tests
+name: QA
 
-on: [push,pull_request,workflow_dispatch]
+on: [ pull_request, workflow_dispatch ]
 
 jobs:
-  test:
+  poetry:
     strategy:
       matrix:
-        os: [ "ubuntu-latest", "macos-latest" ]
-        python-version: [ "3.11" ]
+        os: [ ubuntu-latest, macos-latest ]
+        python-version: [ 3.11 ]
     runs-on: ${{ matrix.os }}
-    name: Python ${{ matrix.python-version }} - ${{ matrix.os }}
+    name: Mypy + Pytest - ${{ matrix.os }} - Python ${{ matrix.python-version }}
     steps:
-      #----------------------------------------------
-      #       check-out repo and set-up python
-      #----------------------------------------------
-      - name: Check out repository
-        uses: actions/checkout@v3
+      - uses: actions/checkout@v3
       - name: Set up python ${{ matrix.python-version }}
         id: setup-python
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      #----------------------------------------------
-      #  -----  install & configure poetry  -----
-      #----------------------------------------------
       - name: Install Poetry
         uses: snok/install-poetry@v1
         with:
           virtualenvs-create: true
           virtualenvs-in-project: true
-      #----------------------------------------------
-      #       load cached venv if cache exists
-      #----------------------------------------------
       - name: Load cached venv
         id: cached-poetry-dependencies
         uses: actions/cache@v3
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
-      #----------------------------------------------
-      # install dependencies if cache does not exist
-      #----------------------------------------------
-      - name: Install project
+      - name: Install project (if cache does not exist)
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction
-      #----------------------------------------------
-      #    run test suite and output coverage file
-      #----------------------------------------------
+      - name: Check code statically with Mypy
+        uses: tsuyoshicho/action-mypy@v3.12.0
+        with:
+          reporter: github-pr-review
+          level: warning
+          execute_command: 'poetry run mypy --strict digimon_card_game tests'
       - name: Test with pytest
         run: poetry run pytest --cov --cov-report=xml
-      #----------------------------------------------
-      #             upload coverage stats
-      # (requires CODECOV_TOKEN in repository secrets)
-      #----------------------------------------------
       - name: Upload coverage reports to Codecov
         uses: codecov/codecov-action@v3
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
           file: ./coverage.xml
+  ruff:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+    name: Ruff - ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Lint code with Ruff
+        uses: chartboost/ruff-action@v1
+        with:
+          args: check . --fix --config pyproject.toml
+          version: 0.0.286
+      - name: Git Auto Commit
+        uses: stefanzweifel/git-auto-commit-action@v4.16.0
+        with:
+          commit_message: ':rotating_light: Lint issues fixed by Ruff CI'
+  black:
+    strategy:
+      matrix:
+        os: [ ubuntu-latest, macos-latest ]
+    runs-on: ${{ matrix.os }}
+    name: Black - ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: Enforce code style with Black
+        uses: psf/black@stable
+  radon:
+    # Container action is only supported on Linux
+    runs-on: ubuntu-latest
+    name: Radon - ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Analyze code complexity with Radon
+        uses: davidslusser/actions_python_radon@v1.0.0
+        with:
+          src: .
+          grade: A
