@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.6.0
     hooks:
       - id: check-added-large-files
       - id: check-case-conflict
@@ -10,20 +10,20 @@ repos:
         args: [ --pytest-test-first ]
         exclude: assertions/
   - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.0.291
+    rev: v0.4.10
     hooks:
       - id: ruff
         args: [ --fix ]
   - repo: https://github.com/psf/black
-    rev: 23.9.1
+    rev: 24.4.2
     hooks:
       - id: black
   - repo: https://github.com/asottile/pyupgrade
-    rev: v3.13.0
+    rev: v3.16.0
     hooks:
       - id: pyupgrade
   - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.5.1
+    rev: v1.10.0
     hooks:
       - id: mypy
         args: [ --strict ]
@@ -31,17 +31,17 @@ repos:
           - attrs==23.1.0
           - pytest==7.4.0
   - repo: https://github.com/python-poetry/poetry
-    rev: 1.6.0
+    rev: 1.8.0
     hooks:
       - id: poetry-check
         args: [ --lock ]
       - id: poetry-lock
   - repo: https://github.com/igorshubovych/markdownlint-cli
-    rev: v0.37.0
+    rev: v0.41.0
     hooks:
       - id: markdownlint
   - repo: https://github.com/Lucas-C/pre-commit-hooks-safety
-    rev: v1.3.2
+    rev: v1.3.3
     hooks:
       - id: python-safety-dependencies-check
         files: pyproject.toml
