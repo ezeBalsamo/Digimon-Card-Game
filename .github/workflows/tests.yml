@@ -7,14 +7,14 @@ jobs:
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest ]
-        python-version: [ 3.11 ]
+        python-version: [ 3.11, 3.12 ]
     runs-on: ${{ matrix.os }}
     name: Mypy + Pytest - ${{ matrix.os }} - Python ${{ matrix.python-version }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up python ${{ matrix.python-version }}
         id: setup-python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
       - name: Install Poetry
@@ -24,7 +24,7 @@ jobs:
           virtualenvs-in-project: true
       - name: Load cached venv
         id: cached-poetry-dependencies
-        uses: actions/cache@v3
+        uses: actions/cache@v4
         with:
           path: .venv
           key: venv-${{ runner.os }}-${{ steps.setup-python.outputs.python-version }}-${{ hashFiles('**/poetry.lock') }}
@@ -32,7 +32,7 @@ jobs:
         if: steps.cached-poetry-dependencies.outputs.cache-hit != 'true'
         run: poetry install --no-interaction
       - name: Check code statically with Mypy
-        uses: tsuyoshicho/action-mypy@v3.12.0
+        uses: tsuyoshicho/action-mypy@v4
         with:
           reporter: github-pr-review
           level: warning
@@ -40,7 +40,7 @@ jobs:
       - name: Test with pytest
         run: poetry run pytest --cov --cov-report=xml
       - name: Upload coverage reports to Codecov
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v4
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
         with:
@@ -52,14 +52,14 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: Ruff - ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Lint code with Ruff
         uses: chartboost/ruff-action@v1
         with:
           args: check . --fix --config pyproject.toml
           version: 0.0.286
       - name: Git Auto Commit
-        uses: stefanzweifel/git-auto-commit-action@v4.16.0
+        uses: stefanzweifel/git-auto-commit-action@v5
         with:
           commit_message: ':rotating_light: Lint issues fixed by Ruff CI'
   black:
@@ -69,7 +69,7 @@ jobs:
     runs-on: ${{ matrix.os }}
     name: Black - ${{ matrix.os }}
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Enforce code style with Black
         uses: psf/black@stable
   radon:
@@ -77,8 +77,9 @@ jobs:
     runs-on: ubuntu-latest
     name: Radon - ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Analyze code complexity with Radon
+        # Version cannot be set to v1
         uses: davidslusser/actions_python_radon@v1.0.0
         with:
           src: .
