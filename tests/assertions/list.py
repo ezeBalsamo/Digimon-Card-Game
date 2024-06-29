@@ -13,7 +13,7 @@ def assert_list_raises_not_minimum_length(
     invalid_list = list(range(minimum_length - 1))
     with pytest.raises(
         ValueError,
-        match=f"Length of '{attr_name}' must be => {minimum_length}: {len(invalid_list)}",
+        match=f"Length of '{attr_name}' must be >= {minimum_length}: {len(invalid_list)}",
     ):
         closure(invalid_list)
 
@@ -24,7 +24,7 @@ def assert_frozenset_raises_not_minimum_length(
     invalid_collection = frozenset(range(minimum_length - 1))
     with pytest.raises(
         ValueError,
-        match=f"Length of '{attr_name}' must be => {minimum_length}: {len(invalid_collection)}",
+        match=f"Length of '{attr_name}' must be >= {minimum_length}: {len(invalid_collection)}",
     ):
         closure(invalid_collection)
 
