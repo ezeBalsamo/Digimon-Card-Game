@@ -1,13 +1,13 @@
 name: QA
 
-on: [ pull_request, workflow_dispatch ]
+on: [ push, pull_request, workflow_dispatch ]
 
 jobs:
   poetry:
     strategy:
       matrix:
         os: [ ubuntu-latest, macos-latest ]
-        python-version: [ 3.11, 3.12 ]
+        python-version: [ 3.12 ]
     runs-on: ${{ matrix.os }}
     name: Mypy + Pytest - ${{ matrix.os }} - Python ${{ matrix.python-version }}
     steps:
@@ -57,7 +57,7 @@ jobs:
         uses: chartboost/ruff-action@v1
         with:
           args: check . --fix --config pyproject.toml
-          version: 0.0.286
+          version: 0.5.4
       - name: Git Auto Commit
         uses: stefanzweifel/git-auto-commit-action@v5
         with:

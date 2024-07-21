@@ -22,7 +22,10 @@ module = ["digimon_card_game.*", "tests.*"]
 implicit_reexport = true
 
 [tool.ruff]
-target-version = "py311"
+target-version = "py312"
+force-exclude = true # to respect exclusions (useful for pre-commit)
+
+[tool.ruff.lint]
 select = ["ALL"]
 ignore = [
     "COM812",   # missing-trailing-comma
@@ -35,25 +38,24 @@ ignore = [
     "TRY003",   # raise-vanilla-args (we do not need to create additional exceptions)
     "TCH",      # flake8-type-checking
 ]
-force-exclude = true # to respect exclusions (useful for pre-commit)
 
-[tool.ruff.per-file-ignores]
+[tool.ruff.lint.per-file-ignores]
 "__init__.py" = [ "F401" ] # unused-import
 "tests/**/*.py" = [
     "S101",     # assert
     "PLR2004",  # magic-value-comparison
 ]
 
-[tool.ruff.flake8-builtins]
+[tool.ruff.lint.flake8-builtins]
 builtins-ignorelist = ["type"] # digi-egg cards and digimon cards
 
-[tool.ruff.mccabe]
+[tool.ruff.lint.mccabe]
 max-complexity = 5
 
-[tool.ruff.pep8-naming]
+[tool.ruff.lint.pep8-naming]
 ignore-names = ["Date"] # we tend to rename the class
 
-[tool.ruff.isort]
+[tool.ruff.lint.isort]
 force-single-line = true # Forces all from imports to appear on their own line.
 
 [build-system]
