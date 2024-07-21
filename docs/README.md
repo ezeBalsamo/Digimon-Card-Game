@@ -26,7 +26,7 @@ pre-commit install
 ```shell
 pytest
 
-mypy --strict digimon_card_game tests
+mypy --strict --enable-incomplete-feature=NewGenericSyntax digimon_card_game tests
 
 pre-commit run --all-files
 ```

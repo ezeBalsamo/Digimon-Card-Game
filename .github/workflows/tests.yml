@@ -36,7 +36,7 @@ jobs:
         with:
           reporter: github-pr-review
           level: warning
-          execute_command: 'poetry run mypy --strict digimon_card_game tests'
+          execute_command: 'poetry run mypy --strict --enable-incomplete-feature=NewGenericSyntax digimon_card_game tests'
       - name: Test with pytest
         run: poetry run pytest --cov --cov-report=xml
       - name: Upload coverage reports to Codecov
